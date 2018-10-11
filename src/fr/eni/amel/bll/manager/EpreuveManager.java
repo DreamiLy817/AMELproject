@@ -1,6 +1,7 @@
 package fr.eni.amel.bll.manager;
 
 
+
 import java.util.List;
 
 import fr.eni.amel.bo.Epreuve;
@@ -15,4 +16,5 @@ public interface EpreuveManager {
 	List<SectionTest> listerSectionsTestsPourEpreuve(Integer idEpreuve);
 	
 	List<Question> tirerAuSortQuestions(Integer idEpreuve);
+
 }

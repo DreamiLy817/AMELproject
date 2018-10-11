@@ -20,7 +20,7 @@ public class EpreuveManagerImpl implements EpreuveManager {
 
 	private static EpreuveManagerImpl instance;
 	private EpreuveDAO epreuveDAO = DaoFactory.epreuveDAO();
-	private SectionTestDao sectionTestDAO = DaoFactory.getSectionDao();
+	private SectionTestDao sectionTestDAO = DaoFactory.getSectionTestDao();
 
 	private EpreuveManagerImpl() {
 
@@ -48,7 +48,9 @@ public class EpreuveManagerImpl implements EpreuveManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		System.out.println(listeEpreuvesUtilisateur);
+
 		return listeEpreuvesUtilisateur;
 	}
 
@@ -73,6 +75,7 @@ public class EpreuveManagerImpl implements EpreuveManager {
 
 	
 	
+
 
 	/**
 	 * Pour une sectionTest, récupérer  les questions

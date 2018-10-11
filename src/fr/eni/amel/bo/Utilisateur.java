@@ -96,7 +96,7 @@ public class Utilisateur {
 	}
 	
 	/**
-	 * @return the password
+	 * @return the profil
 	 */
 	public Profil getProfil() {
 		return profil;
@@ -110,7 +110,7 @@ public class Utilisateur {
 	}
 	
 	/**
-	 * @return the password
+	 * @return the promo
 	 */
 	public Promotion getPromo() {
 		return promo;
@@ -123,6 +123,7 @@ public class Utilisateur {
 		this.promo = promo;
 	}
 
+	
 	/** 
 	 * Méthode toString de Utilisateur
 	 * @see java.lang.Object#toString()
@@ -130,7 +131,7 @@ public class Utilisateur {
 	@Override
 	public String toString() {
 		return "Utilisateur [idUtilisateur=" + idUtilisateur + ", nom=" + nom + ", prenom=" + prenom + ", email="
-				+ email + ", password=" + password + "]";
+				+ email + ", password=" + password +  ", profil=" + profil + ", promo=" +  promo + " ]";
 	}
 	
 	
