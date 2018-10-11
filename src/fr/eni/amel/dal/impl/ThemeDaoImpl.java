@@ -19,7 +19,7 @@ public class ThemeDaoImpl  implements ThemeDao{
 	private static final String INSERT_THEME_QUERY = "INSERT INTO THEME(libelle) VALUES(?)";
 	private static final String SELECT_THEME_QUERY = "SELECT idTheme, libelle FROM THEME WHERE idTheme=?";
 	private static final String SELECT_ALL_THEME = "SELECT idTheme, libelle FROM THEME";
-	private static final String UPDATE_THEME_QUERY = "UPDATE THEME SET (libelle=? ) WHERE idTheme =? ";
+	private static final String UPDATE_THEME_QUERY = "UPDATE THEME SET libelle=?  WHERE idTheme =? ";
 	private static final String DELETE_THEME_QUERY = "DELETE FROM TEST WHERE idThest =? ";
 	
 	private Connection connection;

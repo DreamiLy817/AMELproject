@@ -1,5 +1,6 @@
 package fr.eni.amel.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Promotion {
@@ -8,13 +9,14 @@ public class Promotion {
 	private String libelle;
 	private List<Utilisateur> listeUtilisateurs;
 	
-	private Promotion() {
+	public Promotion() {
 	}
 
 	public Promotion(int codePromo, String libelle) {
 		super();
 		setCodePromo(codePromo);
 		setLibelle(libelle);
+		this.listeUtilisateurs = new ArrayList<Utilisateur>();
 	}
 	
 	/**
@@ -45,6 +47,37 @@ public class Promotion {
 		this.libelle = libelle;
 	}
 
+	//les arrayList
+	
+	/**
+	 * 
+	 * @return une liste d'Utilisateurs
+	 */
+	public ArrayList<Utilisateur> getlisteUtilisateurs()
+	{
+		return (ArrayList<Utilisateur>) this.listeUtilisateurs;
+	}
+	
+	/**
+	 * 
+	 * @param list utilisateurs to set
+	 */
+	public void setlisteUtilisateurs(List<Utilisateur> list)
+	{
+		this.listeUtilisateurs = (ArrayList<Utilisateur>)list;
+	}
+	
+	/**
+	 * 
+	 * @param index
+	 * @return un utilisateur parmi la liste des utilisateurs
+	 */
+	public Utilisateur getUnUtilisateur(int index)
+	{
+		return this.listeUtilisateurs.get(index);
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

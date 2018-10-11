@@ -46,7 +46,7 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 	}
 	
 	@Override
-	public Object insert(Object element) throws DaoException {
+	public Epreuve insert(Epreuve element) throws DaoException {
 		
 		Connection cnx=null;
 		PreparedStatement rqt=null;
@@ -71,7 +71,7 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 	}
 	
 	@Override
-	public void update(Object element) throws DaoException {
+	public void update(Epreuve element) throws DaoException {
 		
 		Epreuve epreuve = (Epreuve)element;
 		Connection cnx=null;
@@ -93,12 +93,12 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 		}
 	}
 	@Override
-	public void delete(Object id) throws DaoException {
+	public void delete(Integer id) throws DaoException {
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public Object selectById(Object id) throws DaoException {
+	public Epreuve selectById(Integer id) throws DaoException {
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
@@ -145,20 +145,21 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 	
 	
 
-	public Object selectByUtilisateur(Object id) throws DaoException {
+	public List<Epreuve> selectByUtilisateur(Object id) throws DaoException {
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
-		Epreuve epreuve = null;
+		List<Epreuve> epreuves = new ArrayList();
 		try{	
 			cnx = getConnection();
 			rqt = cnx.prepareStatement(select_utilisateur);
 			rqt.setInt(1, (int)id);
 			rs=rqt.executeQuery();
 			// SI on trouve au moins 1 résultat, on prend le 1er pour mettre à jour les informations de l'animateur utilis� pour la recherche.
-			if (rs.next()){
-				epreuve = new Epreuve();
+			while (rs.next()){
+				
+				Epreuve epreuve = new Epreuve();
 				epreuve.setIdEpreuve(rs.getInt("idEpreuve"));
 				epreuve.setDateDebutValidite(rs.getDate("dateDedutValidite"));
 				epreuve.setDateFinValidite(rs.getDate("dateFinValidite"));
@@ -181,18 +182,20 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 				QuestionTirageDaoImpl questionDao = QuestionTirageDaoImpl.getInstance();
 				List<QuestionTirage> question_tirages = (List)questionDao.selectByIdEpreuve(id);
 				epreuve.setlisteQuestionTirage(question_tirages);
+				
+				epreuves.add(epreuve);
 			}
 			
 		}catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
 		}
 		
-		return epreuve;
+		return epreuves;
 	}
 	
 	
 	@Override
-	public List selectAll() throws DaoException {
+	public List<Epreuve> selectAll() throws DaoException {
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;

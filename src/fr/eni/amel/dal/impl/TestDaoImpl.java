@@ -1,4 +1,4 @@
-package fr.eni.amel.dal.impl;
+ package fr.eni.amel.dal.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,22 +8,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.amel.bo.Proposition;
-import fr.eni.amel.bo.Question;
+import fr.eni.amel.bo.SectionTest;
 import fr.eni.amel.bo.Test;
 import fr.eni.amel.dal.TestDao;
-import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.amel.test.bo.ConnectBDD;
 import fr.eni.tp.web.common.dal.exception.DaoException;
-import fr.eni.tp.web.common.dal.factory.MSSQLConnectionFactory;
-import fr.eni.tp.web.common.util.ResourceUtil;
 
 //idTest,libelle,description,duree,seuil_haut,seuil_bas
 public class TestDaoImpl implements TestDao{
 	private static final String INSERT_TEST_QUERY = "INSERT INTO TEST(libelle, description, duree, seuil_haut, seuil_bas) VALUES(?,?,?,?,?)";
 	private static final String SELECT_TEST_QUERY = "SELECT idTest, libelle, description, duree, seuil_haut, seuil_bas FROM TEST  WHERE .idTest=?";
 	private static final String SELECT_ALL_TEST = "SELECT idTest,libelle, description, duree, seuil_haut, seuil_bas FROM TEST";
-	private static final String UPDATE_TEST_QUERY = "UPDATE TEST SET (libelle=? , description=?, duree=?, seuil_haut=?, seuil_bas=?) WHERE idTest =? ";
+	private static final String UPDATE_TEST_QUERY = "UPDATE TEST SET libelle=? , description=?, duree=?, seuil_haut=?, seuil_bas=? WHERE idTest =? ";
 	private static final String DELETE_TEST_QUERY = "DELETE FROM TEST WHERE idTest =? ";
 	
 	private Connection connection;
@@ -45,7 +41,6 @@ public class TestDaoImpl implements TestDao{
 			return connection;
 	}
 
-	
 	@Override
 	public Test insert(Test test) throws DaoException {
 		Connection cnx = null;
@@ -85,13 +80,17 @@ public class TestDaoImpl implements TestDao{
 			try {
 				if (rs != null) {
 					rs.close();
+					connection = null;
 				}
 				if (rqt != null) {
 					rqt.close();
+					connection = null;
 				}
 				if (cnx != null) {
 					cnx.close();
+					connection = null;
 				}
+			
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -113,6 +112,8 @@ public class TestDaoImpl implements TestDao{
 			rqt.setInt(3, test.getDuree());
 			rqt.setInt(4, test.getSeuil_haut());
 			rqt.setInt(5, test.getSeuil_bas());
+			//a debugger peut etre 
+			rqt.setInt(6, test.getIdTest());
 	
 			rqt.executeUpdate();
 
@@ -122,9 +123,11 @@ public class TestDaoImpl implements TestDao{
 			try {
 				if (rqt != null) {
 					rqt.close();
+					connection = null;
 				}
 				if (cnx != null) {
 					cnx.close();
+					connection = null;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -149,9 +152,11 @@ public class TestDaoImpl implements TestDao{
 			try {
 				if (rqt != null) {
 					rqt.close();
+					connection = null;
 				}
 				if (cnx != null) {
 					cnx.close();
+					connection = null;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -183,7 +188,12 @@ public class TestDaoImpl implements TestDao{
 				test.setSeuil_haut(rs.getInt("seuil_haut"));
 				test.setSeuil_bas(rs.getInt("seuil_bas"));
 				test.setDuree(rs.getInt("duree"));
-			
+				
+				//Ajouter sectionTest
+				SectionTestDaoImpl sectionTestDao = SectionTestDaoImpl.getInstance();
+				List<SectionTest> listeSectionTest = (List<SectionTest>) sectionTestDao.selectByTest(id);
+				test.setListeSectionTests(listeSectionTest);
+	
 			}
 
 		}  catch (SQLException e) {
@@ -192,12 +202,15 @@ public class TestDaoImpl implements TestDao{
 			try {
 				if (rs != null) {
 					rs.close();
+					connection = null;
 				}
 				if (rqt != null) {
 					rqt.close();
+					connection = null;
 				}
 				if (cnx != null) {
 					cnx.close();
+					connection = null;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -228,6 +241,11 @@ public class TestDaoImpl implements TestDao{
 						rs.getInt("seuil_haut"),
 						rs.getInt("seuil_bas"));
 				
+				//Ajouter sectionTest
+				SectionTestDaoImpl sectionTestDao = SectionTestDaoImpl.getInstance();
+				List<SectionTest> listeSectionTest = (List<SectionTest>) sectionTestDao.selectByTest(test.getIdTest());
+				test.setListeSectionTests(listeSectionTest);
+				
 				listeTest.add(test);
 			}
 		} catch (SQLException e) {
@@ -236,12 +254,15 @@ public class TestDaoImpl implements TestDao{
 			try {
 				if (rs != null){
 					rs.close();
+					connection = null;
 				}
 				if (rqt != null){
 					rqt.close();
+					connection = null;
 				}
 				if(cnx!=null){
 					cnx.close();
+					connection = null;
 				}
 			} catch (SQLException e) {
 				throw new DaoException(e.getMessage(), e);

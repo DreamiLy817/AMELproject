@@ -11,9 +11,10 @@ public class Test {
 	private int seuil_haut;
 	private int seuil_bas;
 	
-
-	private List listeSectionTests;
-	private List listeEpreuves;
+	private int totalQuestionsPosees;
+	
+	private List<?> listeSectionTests;
+	private List<?> listeEpreuves;
 	
 	// getter et setter 
 	
@@ -35,14 +36,25 @@ public class Test {
 	public int getSeuil_bas() {return seuil_bas;}
 	public void setSeuil_bas(int seuil_bas) {this.seuil_bas = seuil_bas;}
 	
-	public List getListeSectionTests() {return listeSectionTests;}
-	public void setListeSectionTests(List listeSectionTests) {this.listeSectionTests = listeSectionTests;}
+	public List<?> getListeSectionTests() {return listeSectionTests;}
+	public void setListeSectionTests(List<?> listeSectionTests) {this.listeSectionTests = listeSectionTests;}
 	
-	public List getListeEpreuves() {return listeEpreuves;}
-	public void setListeEpreuves(List listeEpreuves) {this.listeEpreuves = listeEpreuves;}
+	public List<?> getListeEpreuves() {return listeEpreuves;}
+	public void setListeEpreuves(List<?> listeEpreuves) {this.listeEpreuves = listeEpreuves;}
 	
 	
-	
+	/**
+	 * @return the totalQuestionsPosees
+	 */
+	public int getTotalQuestionsPosees() {return totalQuestionsPosees;}
+	/**
+	 * @param totalQuestionsPosees the totalQuestionsPosees to set
+	 */
+	public void setTotalQuestionsPosees(int totalQuestionsPosees) {
+		// TODO FAIRE le calcul
+		this.totalQuestionsPosees = totalQuestionsPosees;
+		
+	}
 	//constructeur 
 	/**
 	 * @param idTest
@@ -75,7 +87,7 @@ public class Test {
 	}
 	
 	public Test( String libelle, String description, int duree, int seuil_haut, int seuil_bas,
-			List listeSectionTests, List listeEpreuves) {
+			List<?> listeSectionTests, List<?> listeEpreuves) {
 	
 		setLibelle(libelle);
 		setDescription(description);
@@ -107,19 +119,5 @@ public class Test {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
