@@ -11,6 +11,16 @@ import fr.eni.tp.web.common.dal.exception.DaoException;
 
 public class QuestionManagerImpl implements QuestionManager{
 
+		private static QuestionManagerImpl instance;
+		
+		public static QuestionManagerImpl getInstance()
+		{
+			if(instance == null)
+			{
+				instance = new QuestionManagerImpl();
+			}
+			return instance;
+		}
 	
 		public Question getQuestionPropositions(Question question){
 			
@@ -22,5 +32,18 @@ public class QuestionManagerImpl implements QuestionManager{
 			}
 			
 			return question;
+		}
+		
+		public Question getQuestion(int id){
+			
+			try {
+				return DaoFactory.questionDAO().selectById(id);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return null;
+			
 		}
 }

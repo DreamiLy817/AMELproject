@@ -1,10 +1,16 @@
 package fr.eni.amel.bo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -299078408758630364L;
+	
 	private Integer idQuestion;
 	private String enonce;
 	private String media;
