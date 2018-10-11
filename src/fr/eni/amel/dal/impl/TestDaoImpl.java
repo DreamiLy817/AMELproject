@@ -21,7 +21,7 @@ import fr.eni.tp.web.common.util.ResourceUtil;
 //idTest,libelle,description,duree,seuil_haut,seuil_bas
 public class TestDaoImpl implements TestDao{
 	private static final String INSERT_TEST_QUERY = "INSERT INTO TEST(libelle, description, duree, seuil_haut, seuil_bas) VALUES(?,?,?,?,?)";
-	private static final String SELECT_TEST_QUERY = "SELECT idTest, libelle, description, duree, seuil_haut, seuil_bas FROM TEST  WHERE .idTest=?";
+	private static final String SELECT_TEST_QUERY = "SELECT idTest, libelle, description, duree, seuil_haut, seuil_bas FROM TEST  WHERE idTest=?";
 	private static final String SELECT_ALL_TEST = "SELECT idTest,libelle, description, duree, seuil_haut, seuil_bas FROM TEST";
 	private static final String UPDATE_TEST_QUERY = "UPDATE TEST SET (libelle=? , description=?, duree=?, seuil_haut=?, seuil_bas=?) WHERE idTest =? ";
 	private static final String DELETE_TEST_QUERY = "DELETE FROM TEST WHERE idTest =? ";

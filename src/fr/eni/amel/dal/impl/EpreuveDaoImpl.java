@@ -46,7 +46,7 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 	}
 	
 	@Override
-	public Object insert(Object element) throws DaoException {
+	public Epreuve insert(Epreuve element) throws DaoException {
 		
 		Connection cnx=null;
 		PreparedStatement rqt=null;
@@ -71,7 +71,7 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 	}
 	
 	@Override
-	public void update(Object element) throws DaoException {
+	public void update(Epreuve element) throws DaoException {
 		
 		Epreuve epreuve = (Epreuve)element;
 		Connection cnx=null;
@@ -93,12 +93,12 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 		}
 	}
 	@Override
-	public void delete(Object id) throws DaoException {
+	public void delete(Integer id) throws DaoException {
 		// TODO Auto-generated method stub
 		
 	}
 	@Override
-	public Object selectById(Object id) throws DaoException {
+	public Epreuve selectById(Integer id) throws DaoException {
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
@@ -145,7 +145,7 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 	
 	
 
-	public Object selectByUtilisateur(Object id) throws DaoException {
+	public Epreuve selectByUtilisateur(Object id) throws DaoException {
 		
 		Connection cnx = null;
 		PreparedStatement rqt = null;
