@@ -14,15 +14,7 @@ public class SectionTest {
 		this.theme = theme;
 	}
 
-	private Theme theme;
-	
-	public Theme getTheme() {
-		return theme;
-	}
 
-	public void setTheme(Theme theme) {
-		this.theme = theme;
-	}
 
 	// getter et setter
 	public int getNbQuestionsATirer() {

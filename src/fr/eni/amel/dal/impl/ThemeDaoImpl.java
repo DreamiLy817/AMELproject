@@ -175,6 +175,7 @@ public class ThemeDaoImpl  implements ThemeDao{
 				}
 				if (cnx != null) {
 					cnx.close();
+					this.connection = null;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

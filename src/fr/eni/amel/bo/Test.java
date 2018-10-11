@@ -13,8 +13,8 @@ public class Test {
 	
 	private int totalQuestionsPosees;
 	
-	private List<?> listeSectionTests;
-	private List<?> listeEpreuves;
+	private List<SectionTest> listeSectionTests;
+	private List<Epreuve> listeEpreuves;
 	
 	// getter et setter 
 	
@@ -36,11 +36,11 @@ public class Test {
 	public int getSeuil_bas() {return seuil_bas;}
 	public void setSeuil_bas(int seuil_bas) {this.seuil_bas = seuil_bas;}
 	
-	public List<?> getListeSectionTests() {return listeSectionTests;}
-	public void setListeSectionTests(List<?> listeSectionTests) {this.listeSectionTests = listeSectionTests;}
+	public List<SectionTest> getListeSectionTests() {return listeSectionTests;}
+	public void setListeSectionTests(List<SectionTest> listeSectionTests) {this.listeSectionTests = listeSectionTests;}
 	
-	public List<?> getListeEpreuves() {return listeEpreuves;}
-	public void setListeEpreuves(List<?> listeEpreuves) {this.listeEpreuves = listeEpreuves;}
+	public List<Epreuve> getListeEpreuves() {return listeEpreuves;}
+	public void setListeEpreuves(List<Epreuve> listeEpreuves) {this.listeEpreuves = listeEpreuves;}
 	
 	
 	/**
@@ -87,7 +87,7 @@ public class Test {
 	}
 	
 	public Test( String libelle, String description, int duree, int seuil_haut, int seuil_bas,
-			List<?> listeSectionTests, List<?> listeEpreuves) {
+			List<SectionTest> listeSectionTests, List<Epreuve> listeEpreuves) {
 	
 		setLibelle(libelle);
 		setDescription(description);
