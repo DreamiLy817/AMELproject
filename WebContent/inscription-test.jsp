@@ -16,13 +16,14 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/fontawesome/css/font-awesome-min.css">
 
 <title>Inscriptions aux tests</title>
 </head>
-<body>
+<body id="inscription-test">
 	<div class="container">
 		<h1>Inscriptions aux tests</h1>
-		<div>
+		<div class="parametre-block">
 			<div class="search-block">
 				<p>Rechercher les candidats</p>
 				<div class="input-group stylish-input-group">
@@ -54,9 +55,7 @@
 						<option value="3">Three</option>
 					</select>
 				</form>
-			</div>
-
-			<form>
+				<form>
 				<div class="form-group">
 					<label for="dateDebutValidite"> Du</label> <input type="date"
 						class="form-control" id="dateDebutValidite">
@@ -66,6 +65,9 @@
 						class="form-control" id="dateFinValidite">
 				</div>
 			</form>
+			</div>
+
+	
 		</div>
 		<div class="candidat-block">
 			<div class="candidatTrouve-block">
@@ -82,7 +84,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="candidatInscrit- block">
+			<div class="candidatInscrit-block">
 				<form>
 					<div class="form-group">
 						<label for="candidatInscrit">Candidats inscrits</label> <select
