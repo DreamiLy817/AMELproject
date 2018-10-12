@@ -4,8 +4,6 @@ import java.util.List;
 
 import fr.eni.amel.bll.manager.PromotionManager;
 import fr.eni.amel.bo.Promotion;
-import fr.eni.amel.dal.PromotionDao;
-import fr.eni.amel.dal.factory.DaoFactory;
 
 public class PromotionManagerImpl implements PromotionManager {
 	
@@ -19,14 +17,11 @@ public class PromotionManagerImpl implements PromotionManager {
 		}
 		return instance;
 	}
-	
-	
+
 	public List<Promotion> getRecherchePromotion(String recherche) {
 	
 		return null;
-		
-		
+			
 	}
-	
 	
 }

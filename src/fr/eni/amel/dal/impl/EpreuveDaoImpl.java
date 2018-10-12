@@ -14,17 +14,16 @@ import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.EpreuveDAO;
 import fr.eni.amel.test.bo.ConnectBDD;
 import fr.eni.tp.web.common.dal.exception.DaoException;
-import fr.eni.tp.web.common.dal.factory.MSSQLConnectionFactory;
 import fr.eni.tp.web.common.util.ResourceUtil;
 
-public class EpreuveDaoImpl implements EpreuveDAO{
+public class EpreuveDaoImpl implements EpreuveDAO {
 
 	private static final String select_all = "SELECT * FROM EPREUVE";
-	private static final String select_id 	= "SELECT * FROM EPREUVE WHERE idEpreuve = ?";
-	private static final String select_utilisateur 	= "SELECT * FROM EPREUVE WHERE idUtilisateur = ?";
-	private static final String update_id 	= "UPDATE EPREUVE SET dateDedutValidite = ?, dateFinValidite = ?, tempsEcoule = ?, etat = ?, note_obtenue = ? WHERE idEpreuve = ?";
-	private static final String insert 	= "INSERT INTO EPREUVE (dateDedutValidite, dateFinValidite, tempsEcoule, etat, note_obtenue, niveau_obtenu, idTest, idUtilisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	
+	private static final String select_id = "SELECT * FROM EPREUVE WHERE idEpreuve = ?";
+	private static final String select_utilisateur = "SELECT * FROM EPREUVE WHERE idUtilisateur = ?";
+	private static final String update_id = "UPDATE EPREUVE SET dateDedutValidite = ?, dateFinValidite = ?, tempsEcoule = ?, etat = ?, note_obtenue = ? WHERE idEpreuve = ?";
+	private static final String insert = "INSERT INTO EPREUVE (dateDedutValidite, dateFinValidite, tempsEcoule, etat, note_obtenue, niveau_obtenu, idTest, idUtilisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
 	private Connection connection;
 	private static EpreuveDaoImpl instance;
 
@@ -34,27 +33,25 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 		}
 		return instance;
 	}
-	
-	
-	public Connection getConnection() throws SQLException 
-	{
-		//test la connexion si null
-		if(connection == null) {
+
+	public Connection getConnection() throws SQLException {
+		// test la connexion si null
+		if (connection == null) {
 			connection = ConnectBDD.jdbcConnexion();
 		}
-			return connection;
+		return connection;
 	}
-	
+
 	@Override
 	public Epreuve insert(Epreuve element) throws DaoException {
-		
-		Connection cnx=null;
-		PreparedStatement rqt=null;
-		Epreuve epreuve = (Epreuve)element;
-		
-		try{
+
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+		Epreuve epreuve = (Epreuve) element;
+
+		try {
 			cnx = getConnection();
-			rqt=cnx.prepareStatement(insert);
+			rqt = cnx.prepareStatement(insert);
 			rqt.setDate(1, new java.sql.Date(epreuve.getDateDebutValidite().getTime()));
 			rqt.setDate(2, new java.sql.Date(epreuve.getDateFinValidite().getTime()));
 			rqt.setInt(3, epreuve.getTempsEcoule());
@@ -69,17 +66,17 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 		}
 		return epreuve;
 	}
-	
+
 	@Override
 	public void update(Epreuve element) throws DaoException {
-		
-		Epreuve epreuve = (Epreuve)element;
-		Connection cnx=null;
-		PreparedStatement rqt=null;
-		
-		try{
+
+		Epreuve epreuve = (Epreuve) element;
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+
+		try {
 			cnx = getConnection();
-			rqt=cnx.prepareStatement(update_id);
+			rqt = cnx.prepareStatement(update_id);
 			rqt.setDate(1, new java.sql.Date(epreuve.getDateDebutValidite().getTime()));
 			rqt.setDate(2, new java.sql.Date(epreuve.getDateFinValidite().getTime()));
 			rqt.setInt(3, epreuve.getTempsEcoule());
@@ -92,25 +89,28 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 			throw new DaoException(e.getMessage(), e);
 		}
 	}
+
 	@Override
 	public void delete(Integer id) throws DaoException {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public Epreuve selectById(Integer id) throws DaoException {
-		
+
 		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		Epreuve epreuve = null;
-		try{	
+		try {
 			cnx = getConnection();
 			rqt = cnx.prepareStatement(select_id);
-			rqt.setInt(1, (int)id);
-			rs=rqt.executeQuery();
-			// SI on trouve au moins 1 résultat, on prend le 1er pour mettre à jour les informations de l'animateur utilis� pour la recherche.
-			if (rs.next()){
+			rqt.setInt(1, (int) id);
+			rs = rqt.executeQuery();
+			// SI on trouve au moins 1 résultat, on prend le 1er pour mettre à
+			// jour les informations de l'animateur utilis� pour la recherche.
+			if (rs.next()) {
 				epreuve = new Epreuve();
 				epreuve.setIdEpreuve(rs.getInt("idEpreuve"));
 				epreuve.setDateDebutValidite(rs.getDate("dateDedutValidite"));
@@ -119,46 +119,46 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 				epreuve.setEtat(rs.getString("etat"));
 				epreuve.setNote_obtenue(rs.getInt("note_obtenue"));
 				epreuve.setNiveau_obtenu(rs.getString("niveau_obtenu"));
-				
-				//Ajouter user
+
+				// Ajouter user
 				UtilisateurDaoImpl utilisateurDao = UtilisateurDaoImpl.getInstance();
 				Utilisateur utilisateur = utilisateurDao.selectById(rs.getInt("idUtilisateur"));
 				epreuve.setUtilisateur(utilisateur);
-				
-				//Ajouter test
+
+				// Ajouter test
 				TestDaoImpl TestDao = TestDaoImpl.getInstance();
 				Test test = TestDao.selectById(rs.getInt("idTest"));
 				epreuve.setTest(test);
-				
-				//Ajouter Questions Tirages
+
+				// Ajouter Questions Tirages
 				QuestionTirageDaoImpl questionDao = QuestionTirageDaoImpl.getInstance();
-				List<QuestionTirage> question_tirages = (List)questionDao.selectByIdEpreuve(id);
+				List<QuestionTirage> question_tirages = (List) questionDao.selectByIdEpreuve(id);
 				epreuve.setlisteQuestionTirage(question_tirages);
 			}
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
 		}
-		
+
 		return epreuve;
 	}
-	
-	
 
-	public List<Epreuve> selectByUtilisateur(Object id) throws DaoException {
-		
+	@Override
+	public List<Epreuve> selectByUtilisateur(Integer id) throws DaoException {
+
 		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		List<Epreuve> epreuves = new ArrayList();
-		try{	
+		try {
 			cnx = getConnection();
 			rqt = cnx.prepareStatement(select_utilisateur);
-			rqt.setInt(1, (int)id);
-			rs=rqt.executeQuery();
-			// SI on trouve au moins 1 résultat, on prend le 1er pour mettre à jour les informations de l'animateur utilis� pour la recherche.
-			while (rs.next()){
-				
+			rqt.setInt(1, (int) id);
+			rs = rqt.executeQuery();
+			// SI on trouve au moins 1 résultat, on prend le 1er pour mettre à
+			// jour les informations de l'animateur utilis� pour la recherche.
+			while (rs.next()) {
+
 				Epreuve epreuve = new Epreuve();
 				epreuve.setIdEpreuve(rs.getInt("idEpreuve"));
 				epreuve.setDateDebutValidite(rs.getDate("dateDedutValidite"));
@@ -167,49 +167,49 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 				epreuve.setEtat(rs.getString("etat"));
 				epreuve.setNote_obtenue(rs.getInt("note_obtenue"));
 				epreuve.setNiveau_obtenu(rs.getString("niveau_obtenu"));
-				
-				//Ajouter user
+
+				// Ajouter user
 				UtilisateurDaoImpl utilisateurDao = UtilisateurDaoImpl.getInstance();
 				Utilisateur utilisateur = utilisateurDao.selectById(rs.getInt("idUtilisateur"));
 				epreuve.setUtilisateur(utilisateur);
-				
-				//Ajouter test
+
+				// Ajouter test
 				TestDaoImpl TestDao = TestDaoImpl.getInstance();
 				Test test = TestDao.selectById(rs.getInt("idTest"));
 				epreuve.setTest(test);
-				
-				//Ajouter Questions Tirages
+
+				// Ajouter Questions Tirages
 				QuestionTirageDaoImpl questionDao = QuestionTirageDaoImpl.getInstance();
-				List<QuestionTirage> question_tirages = (List)questionDao.selectByIdEpreuve(id);
+				List<QuestionTirage> question_tirages = (List) questionDao.selectByIdEpreuve(id);
 				epreuve.setlisteQuestionTirage(question_tirages);
-				
+
 				epreuves.add(epreuve);
 			}
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
 		}
-		
+
 		return epreuves;
 	}
-	
-	
+
 	@Override
 	public List<Epreuve> selectAll() throws DaoException {
-		
+
 		Connection cnx = null;
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		List<Epreuve> epreuves = new ArrayList<Epreuve>();
 		Epreuve epreuve = null;
-		try{
+		try {
 			cnx = getConnection();
 			rqt = cnx.prepareStatement(select_all);
-			rs=rqt.executeQuery();
-			
-			
-			// SI on trouve au moins 1 r�sultat, on prend le 1er pour mettre � jour les informations de l'animateur utilis� pour la recherche.
-			while(rs.next()){
+			rs = rqt.executeQuery();
+
+			// SI on trouve au moins 1 r�sultat, on prend le 1er pour mettre
+			// � jour les informations de l'animateur utilis� pour la
+			// recherche.
+			while (rs.next()) {
 				epreuve = new Epreuve();
 				epreuve.setIdEpreuve(rs.getInt("idEpreuve"));
 				epreuve.setDateDebutValidite(rs.getDate("dateDedutValidite"));
@@ -218,27 +218,26 @@ public class EpreuveDaoImpl implements EpreuveDAO{
 				epreuve.setEtat(rs.getString("etat"));
 				epreuve.setNote_obtenue(rs.getInt("note_obtenue"));
 				epreuve.setNiveau_obtenu(rs.getString("niveau_obtenu"));
-				
-				//Ajouter user
+
+				// Ajouter user
 				UtilisateurDaoImpl utilisateurDao = UtilisateurDaoImpl.getInstance();
 				Utilisateur utilisateur = utilisateurDao.selectById(rs.getInt("idUtilisateur"));
 				epreuve.setUtilisateur(utilisateur);
-				
-				//Ajouter test
+
+				// Ajouter test
 				TestDaoImpl TestDao = TestDaoImpl.getInstance();
 				Test test = TestDao.selectById(rs.getInt("idTest"));
 				epreuve.setTest(test);
-				
+
 				epreuves.add(epreuve);
 			}
-			
-		}catch (SQLException e) {
+
+		} catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
-		}finally
-		{
+		} finally {
 			ResourceUtil.safeClose(rs, rqt, cnx);
 			connection = null;
 		}
 		return epreuves;
-	} 	
+	}
 }
