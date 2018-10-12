@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.eni.amel.bll.manager.UtilisateurManager;
 import fr.eni.amel.bo.Promotion;
+import fr.eni.amel.bo.Test;
 import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
@@ -196,7 +197,25 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 			e.printStackTrace();
 		}
 		
-		System.out.println(listeCandidat);
+
+		//System.out.println(listeCandidat);
+		
+		StringBuffer sb = new StringBuffer();
+		for (Utilisateur candidat : listeCandidat) {
+			sb.append(" Nom [nom = ");
+			sb.append(candidat.getNom());
+			sb.append(" ,Prenom = ");
+			sb.append(candidat.getPrenom());
+			sb.append(" ,email = ");
+			sb.append(candidat.getEmail());
+			sb.append(" ,password = ");
+			sb.append(candidat.getPassword());
+			sb.append(" ,code Profil = ");
+			sb.append(candidat.getProfil());
+			sb.append(" ,code Promo = ");
+			sb.append(candidat.getPromo()).append("]\n");
+			System.out.println(sb);
+		}
 	
 		return listeCandidat;
 			

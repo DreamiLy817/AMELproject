@@ -5,6 +5,6 @@ import fr.eni.amel.bll.factory.ManagerFactory;
 public class AppliUtilisateurManager {
 	public static void main(String[] args) {
 		// Test de la recherche d'une promotion 
-		ManagerFactory.utilisateurManager().getRechercheCandidat("Le");
+		ManagerFactory.utilisateurManager().getRechercheCandidat("ri");
 	}
 }
