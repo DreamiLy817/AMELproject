@@ -25,10 +25,12 @@
 					</div>	
 					<c:forEach items="${propositions}" var="proposition">
 						<div class="form-check">
-						    <input type="checkbox" class="form-check-input" id="Check${proposition.idProposition}">
+						    <input type="checkbox" class="form-check-input" id="Check${proposition.idProposition}" name="Check${proposition.idProposition}" value="1">
 						    <label class="form-check-label" for="Check${proposition.idProposition}">${proposition.enonce}</label>
 						</div>
 					</c:forEach>
+					<input type="hidden" id="hid_idQuestion" name="hid_idQuestion" value="${question.idQuestion}">
+					<input type="hidden" id="hid_idEpreuve" name="hid_idEpreuve" value="${idEpreuve}">
 					<input type="submit" class="form-submit-input" value="valider">
 				</form>
 			</div>
