@@ -8,9 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.amel.bo.Question;
 import fr.eni.amel.bo.Test;
 import fr.eni.amel.bo.Theme;
+import fr.eni.amel.dal.QuestionDao;
 import fr.eni.amel.dal.ThemeDao;
+import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.amel.test.bo.ConnectBDD;
 import fr.eni.tp.web.common.dal.exception.DaoException;
 
@@ -24,6 +27,7 @@ public class ThemeDaoImpl  implements ThemeDao{
 	
 	private Connection connection;
 	private static ThemeDaoImpl instance;
+	private static QuestionDao questionDao= DaoFactory.questionDAO();
 
 	public static ThemeDaoImpl getInstance() {
 		if (instance == null) {
@@ -161,6 +165,8 @@ public class ThemeDaoImpl  implements ThemeDao{
 				theme = new Theme();
 				theme.setIdTheme(id);
 				theme.setLibelle(rs.getString("libelle"));
+				List<Question> listeQuestions= questionDao.selectAllByTheme(rs.getInt("idTheme"));
+				theme.setListeQuestions(listeQuestions);
 			}
 
 		}  catch (SQLException e) {
