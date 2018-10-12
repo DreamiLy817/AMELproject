@@ -16,9 +16,4 @@ public class PromotionManagerImpl implements PromotionManager {
 		}
 		return instance;
 	}
-	
-	
-	
-	
-
 }
