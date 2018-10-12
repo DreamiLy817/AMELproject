@@ -10,6 +10,7 @@ import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.tp.web.common.bll.exception.ManagerException;
 import fr.eni.tp.web.common.dal.exception.DaoException;
+import fr.eni.tp.web.common.exception.FunctionalException;
 import fr.eni.tp.web.common.util.ValidationUtil;
 
 
@@ -25,7 +26,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 		
 	}
 	
-	public AuthentificationManagerImpl getInstance() {
+	public static AuthentificationManagerImpl getInstance() {
 		
 		if (instance == null) {
 			instance = new AuthentificationManagerImpl();
@@ -35,7 +36,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 	}
 	
 	@Override
-	public Utilisateur getAuthentification(String mail, String password) throws ManagerException {
+	public Utilisateur getAuthentification(String mail, String password) throws ManagerException, FunctionalException{
 		
 		
 		Utilisateur utilisateur = null;
@@ -49,9 +50,9 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 		
 			
 		} catch (DaoException e) {
-			LOGGER.error("Erreur DAO en récupérant l'email et le mot de passe", e);
+			LOGGER.error("Les idnetifiants que vous avez saisis sont incorrects.", e);
 			
-			throw new ManagerException(e.getMessage(), e);
+			e.printStackTrace();
 		}
 		
 		return utilisateur;

@@ -12,6 +12,14 @@
   
   <!-- Servlets -->
   <servlet-mapping>
+  		<servlet-name>authentificationController</servlet-name>
+  		<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  		<servlet-name>authentificationController</servlet-name>
+  		<servlet-class>fr.eni.amel.ihm.controller.AuthentificationController</servlet-class>
+  </servlet>
+  <servlet-mapping>
 		<servlet-name>questionController</servlet-name>
 		<url-pattern>/question/show</url-pattern>
 		<url-pattern>/question</url-pattern>
@@ -24,6 +32,14 @@
 	
 	
 	<!-- JSP -->
+	<servlet>
+		<servlet-name>authentification</servlet-name>
+		<jsp-file>/authentification.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>authentification</servlet-name>
+		<url-pattern>/authentification</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>showQuestion</servlet-name>
 		<jsp-file>/question.jsp</jsp-file>
