@@ -16,7 +16,7 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="./css/style.css">
-<link rel="stylesheet" href="./css/fontawesome/css/font-awesome-min.css">
+<link rel="stylesheet" href="./css/fontawesome/css/font-awesome.min.css">
 
 <title>Inscriptions aux tests</title>
 </head>
@@ -26,23 +26,26 @@
 		<div class="parametre-block">
 			<div class="search-block">
 				<p>Rechercher les candidats</p>
-				<div class="input-group stylish-input-group">
-					<input type="text" class="form-control" placeholder="Search">
-					<span class="input-group-addon">
-						<button type="submit">ok</button>
-					</span>
-				</div>
+				<form action="${pageContext.request.contextPath}/login/validerAcces"
+					method="post">
+					<div class="input-group stylish-input-group">
+						<input type="text" class="form-control" placeholder="Search">
+						<span class="input-group-addon">
+							<button type="submit">ok</button>
+						</span>
+					</div>
 
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio"
-						name="inlineRadioOptions" id="inlineRadio1" value="option1">
-					<label class="form-check-label" for="inlineRadio1">Nom</label>
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio"
-						name="inlineRadioOptions" id="inlineRadio2" value="option2">
-					<label class="form-check-label" for="inlineRadio2">Promotion</label>
-				</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio"
+							name="inlineRadioOptions" id="inlineRadio1" value="option1">
+						<label class="form-check-label" for="inlineRadio1">Nom</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio"
+							name="inlineRadioOptions" id="inlineRadio2" value="option2">
+						<label class="form-check-label" for="inlineRadio2">Promotion</label>
+					</div>
+				</form>
 			</div>
 
 			<div class="selection-block">
@@ -56,18 +59,18 @@
 					</select>
 				</form>
 				<form>
-				<div class="form-group">
-					<label for="dateDebutValidite"> Du</label> <input type="date"
-						class="form-control" id="dateDebutValidite">
-				</div>
-				<div class="form-group">
-					<label for="dateFinValidite"> Au:</label> <input type="date"
-						class="form-control" id="dateFinValidite">
-				</div>
-			</form>
+					<div class="form-group">
+						<label for="dateDebutValidite"> Du</label> <input type="date"
+							class="form-control" id="dateDebutValidite">
+					</div>
+					<div class="form-group">
+						<label for="dateFinValidite"> Au:</label> <input type="date"
+							class="form-control" id="dateFinValidite">
+					</div>
+				</form>
 			</div>
 
-	
+
 		</div>
 		<div class="candidat-block">
 			<div class="candidatTrouve-block">
@@ -84,6 +87,10 @@
 					</div>
 				</form>
 			</div>
+			<div>
+				<i class="fa fa-angle-right" aria-hidden="true"></i> <i
+					class="fa fa-angle-left" aria-hidden="true"></i>
+			</div>
 			<div class="candidatInscrit-block">
 				<form>
 					<div class="form-group">
@@ -98,7 +105,7 @@
 					</div>
 				</form>
 			</div>
-			
+
 
 		</div>
 	</div>
