@@ -5,12 +5,14 @@ import java.util.List;
 import fr.eni.amel.bo.Profil;
 import fr.eni.amel.bo.Promotion;
 import fr.eni.amel.bo.Utilisateur;
+import fr.eni.amel.dal.TestDao;
+import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.tp.web.common.dal.exception.DaoException;
 
 public class AppliUtilisateurDAL {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws DaoException {
 		
 		// test Sélectionner un-e utilisateurice
 //		try {
@@ -45,33 +47,33 @@ public class AppliUtilisateurDAL {
 //		System.out.println("**************************************************************************************************************");
 		
 		// test modifier un-e utilisateurice
-		try {
-			
-			Utilisateur marion = DaoFactory.getUtilisateurDao().selectById(8);
-			System.out.println("Compte Marion avant modification :");
-			System.out.println(marion.getPrenom() + " " + marion.getNom() + " : mail = "+ marion.getEmail() + ", mot de passe = "+ marion.getPassword());
-			System.out.println("profil : " + marion.getProfil().getLibelle() + " et promo : " + marion.getPromo().getLibelle());
-			
-			marion.setNom("De Oliveira");
-			marion.setPrenom("Bruno");
-			marion.setEmail("b.deoliveira@mail.com");
-			marion.setPassword("test06");
-			
-			Profil marionProfil = DaoFactory.getProfilDao().selectById(3);
-			marion.setProfil(marionProfil);
-			
-			Promotion marionPromo = DaoFactory.getPromotionDao().selectById(1);
-			marion.setPromo(marionPromo);
-			
-			DaoFactory.getUtilisateurDao().update(marion);
-			
-			System.out.println("Compte Marion après modification :");
-			System.out.println(marion.getPrenom() + " " + marion.getNom() + " : mail = "+ marion.getEmail() + ", mot de passe = "+ marion.getPassword());
-			System.out.println("profil : " + marion.getProfil().getLibelle() + " et promo : " + marion.getPromo().getLibelle());
-			
-		} catch (DaoException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			
+//			Utilisateur marion = DaoFactory.getUtilisateurDao().selectById(8);
+//			System.out.println("Compte Marion avant modification :");
+//			System.out.println(marion.getPrenom() + " " + marion.getNom() + " : mail = "+ marion.getEmail() + ", mot de passe = "+ marion.getPassword());
+//			System.out.println("profil : " + marion.getProfil().getLibelle() + " et promo : " + marion.getPromo().getLibelle());
+//			
+//			marion.setNom("De Oliveira");
+//			marion.setPrenom("Bruno");
+//			marion.setEmail("b.deoliveira@mail.com");
+//			marion.setPassword("test06");
+//			
+//			Profil marionProfil = DaoFactory.getProfilDao().selectById(3);
+//			marion.setProfil(marionProfil);
+//			
+//			Promotion marionPromo = DaoFactory.getPromotionDao().selectById(1);
+//			marion.setPromo(marionPromo);
+//			
+//			DaoFactory.getUtilisateurDao().update(marion);
+//			
+//			System.out.println("Compte Marion après modification :");
+//			System.out.println(marion.getPrenom() + " " + marion.getNom() + " : mail = "+ marion.getEmail() + ", mot de passe = "+ marion.getPassword());
+//			System.out.println("profil : " + marion.getProfil().getLibelle() + " et promo : " + marion.getPromo().getLibelle());
+//			
+//		} catch (DaoException e) {
+//			e.printStackTrace();
+//		}
 		
 //		System.out.println("**************************************************************************************************************");
 //		
@@ -93,17 +95,26 @@ public class AppliUtilisateurDAL {
 		System.out.println("**************************************************************************************************************");
 		
 		// test Sélectionner toustes les utilisateurices
-		try {
-			List<Utilisateur> listeUtilisateurs = DaoFactory.getUtilisateurDao().selectAll();
-			
-			for (Utilisateur utilisateur : listeUtilisateurs) {
-				System.out.println(utilisateur);
-			}
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//		try {
+//			List<Utilisateur> listeUtilisateurs = DaoFactory.getUtilisateurDao().selectAll();
+//			
+//			for (Utilisateur utilisateur : listeUtilisateurs) {
+//				System.out.println(utilisateur);
+//			}
+//		} catch (DaoException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		List<Utilisateur> listeRechercheUtilisateurs = DaoFactory.getUtilisateurDao().rechercherCandidat("Le");
+		for (Utilisateur utilisateurRecherche : listeRechercheUtilisateurs) {
+			System.out.println(utilisateurRecherche);
 		}
-
+		
+		
 	}
+	
+	
+		
 
 }

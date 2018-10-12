@@ -11,6 +11,7 @@ public class Utilisateur {
 	private Promotion promo;
 	
 	public Utilisateur() {
+		super();
 		
 	}
 	
