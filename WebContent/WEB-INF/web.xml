@@ -1,33 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>AMELproject</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
-  
-  <servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>AMELproject</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet-mapping>
 		<servlet-name>questionController</servlet-name>
 		<url-pattern>/question/show</url-pattern>
 		<url-pattern>/question</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>questionController</servlet-name>
 		<servlet-class>fr.eni.amel.ihm.controller.QuestionController</servlet-class>
 	</servlet>
-		<servlet>
+
+	<servlet>
 		<servlet-name>showQuestion</servlet-name>
 		<jsp-file>/question.jsp</jsp-file>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>showQuestion</servlet-name>
 		<url-pattern>/forward/question</url-pattern>
 	</servlet-mapping>
-	
+
+	<!-- CONTROLLER TEST -->
+	<servlet-mapping>
+		<servlet-name>TestController</servlet-name>
+		<url-pattern>/tests/show</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TestController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.TestController</servlet-class>
+	</servlet>
+
+	<!-- JSP TEST -->
+	<servlet>
+		<servlet-name>showTests</servlet-name>
+		<jsp-file>/tests.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>showTests</servlet-name>
+		<url-pattern>/forward/tests</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>confirmTest</servlet-name>
+		<jsp-file>/confirm.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>confirmTest</servlet-name>
+		<url-pattern>/test/confirm</url-pattern>
+	</servlet-mapping>
+
 </web-app>
