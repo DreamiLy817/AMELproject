@@ -13,7 +13,10 @@ import fr.eni.amel.bo.Question;
 import fr.eni.amel.bo.QuestionTirage;
 import fr.eni.amel.bo.SectionTest;
 import fr.eni.amel.bo.Test;
+import fr.eni.amel.dal.EpreuveDAO;
 import fr.eni.amel.dal.SectionTestDao;
+import fr.eni.amel.dal.ThemeDao;
+import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.amel.test.bo.ConnectBDD;
 import fr.eni.tp.web.common.dal.exception.DaoException;
 
@@ -28,6 +31,8 @@ public class SectionTestDaoImpl implements SectionTestDao {
 	
 	private Connection connection;
 	private static SectionTestDaoImpl instance;
+	
+	private ThemeDao themeDao = DaoFactory.getThemeDao();
 	
 	public static SectionTestDaoImpl getInstance() {
 		if( instance == null) {
@@ -91,7 +96,8 @@ public class SectionTestDaoImpl implements SectionTestDao {
 			while(rs.next()){
 				sectionTest  = new SectionTest();
 				sectionTest.setNbQuestionsATirer(rs.getInt("nbQuestionsATirer"));
-			
+				
+				sectionTest.setTheme(themeDao.selectById(rs.getInt("idTheme")));
 			
 				listeSectionTest.add(sectionTest);
 			}

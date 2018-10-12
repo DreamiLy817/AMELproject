@@ -24,6 +24,7 @@ public class QuestionDaoImpl implements QuestionDao {
 	private static final String SELECT_ALL_QUESTIONS = "SELECT q.idQuestion, q.enonce, q.media, q.points, q.idTheme FROM QUESTION q";
 	private static final String UPDATE_QUESTION_QUERY = "UPDATE QUESTION SET (enonce=? , media=?, points=?, idTheme=?) WHERE idQuestion =? ";
 	private static final String DELETE_QUESTION_QUERY = "DELETE FROM QUESTION WHERE idQuestion =? ";
+	private static final String SELECT_QUESTIONS_BY_THEME = "SELECT q.idQuestion, q.enonce, q.media, q.points, q.idTheme FROM QUESTION q WHERE q.idTheme=?";
 
 	private static QuestionDaoImpl instance;
 	private Connection connection;
@@ -196,4 +197,51 @@ public class QuestionDaoImpl implements QuestionDao {
 		return listeQuestions;
 	}
 
+	@Override
+	public List<Question> selectAllByTheme(Integer idTheme){
+		List<Question> listeQuestions = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		Integer questionId = null;
+		Question question = null;
+		Theme theme = null;
+		List<Proposition> listePropositions = new ArrayList();
+
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(SELECT_QUESTIONS_BY_THEME);
+			statement.setInt(1, idTheme);
+
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				question = new Question();
+				question.setEnonce(resultSet.getString("enonce"));
+				question.setIdQuestion(resultSet.getInt("idQuestion"));
+				question.setMedia(resultSet.getString("media"));
+				question.setPoints(resultSet.getLong("points"));
+				try {
+					listePropositions = DaoFactory.propositionDAO().listePropositionsParQuestion(question.getIdQuestion());
+				} catch (DaoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				question.setListePropositions(listePropositions);
+				listeQuestions.add(question);
+			}
+		} catch (SQLException e) {
+			try {
+				throw new DaoException(e.getMessage(), e);
+			} catch (DaoException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally {
+			ResourceUtil.safeClose(resultSet, statement,connection);
+			this.connection = null;
+		}
+
+		return listeQuestions;
+	}
 }
