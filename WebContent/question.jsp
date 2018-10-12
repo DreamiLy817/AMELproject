@@ -6,13 +6,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Question 1</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<title>Question 1</title>
 	</head>
-		<body>
-		Questions : ${question.enonce}	</br>	
-			<c:forEach items="${propositions}" var="proposition">
-					   ${proposition.enonce}</br>
-			</c:forEach>
-		</body>
-	</html>
+	<body>
+		<div class="row">
+			<div class="col-md-3">
+				Navigation :
+				<c:forEach var="i" begin="0" end="${nbQuestion}" step="1">
+					<a href="${pageContext.request.contextPath}/question/show?no=${i}">${i}</a>
+				</c:forEach>
+			</div>
+			<div class="col-md-6">
+				<form action="${pageContext.request.contextPath}/reponse/save" method="Post">
+					<div class="row">
+						Questions : ${question.enonce}
+					</div>	
+					<c:forEach items="${propositions}" var="proposition">
+						<div class="form-check">
+						    <input type="checkbox" class="form-check-input" id="Check${proposition.idProposition}">
+						    <label class="form-check-label" for="Check${proposition.idProposition}">${proposition.enonce}</label>
+						</div>
+					</c:forEach>
+					<input type="submit" class="form-submit-input" value="valider">
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
