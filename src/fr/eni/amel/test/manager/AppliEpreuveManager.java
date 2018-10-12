@@ -7,10 +7,10 @@ public class AppliEpreuveManager {
 	public static void main(String[] args) {
 		
 		//Test de la méthode qui liste les épreuves pour un utilisateur
-		//ManagerFactory.epreuveManager().listerEpreuvesPourUtilisateur(2);
+		ManagerFactory.epreuveManager().listerEpreuvesPourUtilisateur(2);
 		
 		// Test de la méthode qui liste 
-		ManagerFactory.epreuveManager().tirerAuSortQuestions(1);
+		//ManagerFactory.epreuveManager().tirerAuSortQuestions(1);
 	}
 
 }
