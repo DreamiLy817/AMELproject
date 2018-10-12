@@ -34,7 +34,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 	}
 	
 	@Override
-	public Utilisateur getAuthentification(String mail, String password) {
+	public Utilisateur getAuthentification(String mail, String password) throws ManagerException {
 		
 		
 		Utilisateur utilisateur = null;
@@ -46,7 +46,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 			utilisateur = utilisateurDao.selectByMailAndPassword(mail, password);
 			
 		} catch (DaoException e) {
-			LOGGER.error("Erreur DAO en récupérant la liste d'utilisateurices", e);
+			LOGGER.error("Erreur DAO en récupérant l'email et le mot de passe", e);
 			
 			throw new ManagerException(e.getMessage(), e);
 		}

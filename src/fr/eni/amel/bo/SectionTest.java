@@ -14,6 +14,8 @@ public class SectionTest {
 		this.theme = theme;
 	}
 
+
+
 	// getter et setter
 	public int getNbQuestionsATirer() {
 		return nbQuestionsATirer;

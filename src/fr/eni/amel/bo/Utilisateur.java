@@ -11,6 +11,7 @@ public class Utilisateur {
 	private Promotion promo;
 	
 	public Utilisateur() {
+		super();
 		
 	}
 	
@@ -23,6 +24,24 @@ public class Utilisateur {
 		setPassword(password);
 		setProfil(profil);
 		setPromo(promotion);
+	}
+
+	
+
+	/**
+	 * @param idUtilisateur
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param password
+	 */
+	public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String password) {
+		super();
+		setIdUtilisateur(idUtilisateur);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setPassword(password);
 	}
 
 	/**

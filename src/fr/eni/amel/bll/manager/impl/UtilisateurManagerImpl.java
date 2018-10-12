@@ -39,7 +39,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
      * @return liste Utilisateur
      */
 	@Override
-	public List<Utilisateur> getAllUtilisateurs() throws ManagerException, FunctionalException {
+	public List<Utilisateur> getAllUtilisateurs() throws ManagerException {
 		
 		List<Utilisateur> listeUtilisateurs = null;
 		
