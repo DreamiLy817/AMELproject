@@ -196,10 +196,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-		//System.out.println(listeCandidat);
-		
+				
 		StringBuffer sb = new StringBuffer();
 		for (Utilisateur candidat : listeCandidat) {
 			sb.append(" Nom [nom = ");
@@ -214,8 +211,8 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 			sb.append(candidat.getProfil());
 			sb.append(" ,code Promo = ");
 			sb.append(candidat.getPromo()).append("]\n");
-			System.out.println(sb);
 		}
+		System.out.println(sb);
 	
 		return listeCandidat;
 			
