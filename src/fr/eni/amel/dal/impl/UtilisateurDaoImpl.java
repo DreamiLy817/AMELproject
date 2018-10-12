@@ -24,6 +24,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 	private static final String SELECT_ALL_UTILS = "SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.codeProfil, u.codePromo  FROM UTILISATEUR u";
 	private static final String UPDATE_UTIL_QUERY = "UPDATE UTILISATEUR SET nom=?, prenom=?, email=?, password=?, codeProfil=?, codePromo=? WHERE idUtilisateur = ?";
 	private static final String DELETE_UTIL_QUERY = "DELETE FROM UTILISATEUR WHERE idUtilisateur = ?";
+	private static final String RECHERCHE_UTIL_QUERY = "SELECT  * FROM UTILISATEUR WHERE nom LIKE ? or prenom LIKE ? ORDER BY idUtilisateur ASC";
 	
 	private Connection connection;
 	private static UtilisateurDaoImpl instance;
@@ -261,4 +262,55 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 		return listeUtilisateurs;
 	}
 
+	@Override
+	public List<Utilisateur> rechercherCandidat(String recherche) throws DaoException {
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null; 
+		List<Utilisateur> listeUser = new ArrayList<Utilisateur>();
+		Utilisateur user = null;
+		try {
+			//cnx = MSSQLConnectionFactory.get();
+			cnx = getConnection();
+			rqt = cnx.prepareStatement(RECHERCHE_UTIL_QUERY);
+			rqt.setString(1, "%" + recherche + "%");
+			rqt.setString(2, "%" + recherche + "%");
+			rs = rqt.executeQuery();
+		
+			while(rs.next()) {
+				user = new Utilisateur(rs.getInt("idUtilisateur"),
+						rs.getString("nom"),
+						rs.getString("prenom"),
+						rs.getString("email"),
+						rs.getString("password"));
+				
+				ProfilDaoImpl profilDAO =  ProfilDaoImpl.getInstance();
+				Profil unProfil = (Profil)profilDAO.selectById(rs.getInt("codeProfil"));
+				user.setProfil(unProfil);
+				
+				PromotionDaoImpl promoDAO = PromotionDaoImpl.getInstance();
+				Promotion unePromo = (Promotion)promoDAO.selectById(rs.getInt("codePromo"));
+				user.setPromo(unePromo);
+			
+				listeUser.add(user);
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		} finally {
+			try {
+				if (rqt != null) {
+					rqt.close();
+					this.connection = null;
+				}
+				if (cnx != null) {
+					cnx.close();
+					this.connection = null;
+				}
+			} catch (SQLException e) {
+				throw new DaoException(e.getMessage(), e);
+			}
+		}
+		return listeUser;
+	}
+	
 }

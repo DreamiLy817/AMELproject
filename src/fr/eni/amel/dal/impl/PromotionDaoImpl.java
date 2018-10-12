@@ -9,6 +9,7 @@ import java.util.List;
 
 import fr.eni.amel.bo.Profil;
 import fr.eni.amel.bo.Promotion;
+import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.PromotionDao;
 import fr.eni.amel.test.bo.ConnectBDD;
 import fr.eni.tp.web.common.dal.exception.DaoException;
@@ -18,6 +19,7 @@ public class PromotionDaoImpl implements PromotionDao{
 
 	private static final String SELECT_PROMO_QUERY = "SELECT p.codePromo, p.libelle FROM PROMOTION p WHERE p.codePromo = ?";
 	private static final String SELECT_ALL_PROMO = "SELECT p.codePromo, p.libelle FROM PROMOTION p";
+	private static final String RECHERCHE_PROMO_QUERY = "SELECT  * FROM PROMOTION WHERE libelle LIKE ?  ORDER BY codePromo ASC";
 	
 	private Connection connection;
 	private static PromotionDaoImpl instance;
@@ -134,6 +136,45 @@ public class PromotionDaoImpl implements PromotionDao{
 		}
 		
 		return listePromos;
+	}
+
+	@Override
+	public List<Promotion> rechercherPromotion(String recherche) throws DaoException {
+		Connection cnx = null;
+		PreparedStatement rqt = null;
+		ResultSet rs = null; 
+		List<Promotion> listePromo = new ArrayList<Promotion>();
+		Promotion promo = null;
+		try {
+			//cnx = MSSQLConnectionFactory.get();
+			cnx = getConnection();
+			rqt = cnx.prepareStatement(RECHERCHE_PROMO_QUERY);
+			rqt.setString(1, "%" + recherche + "%");
+			rs = rqt.executeQuery();
+		
+			while(rs.next()) {
+				promo = new Promotion(rs.getInt("codePromo"),
+						rs.getString("libelle"));
+				
+				listePromo.add(promo);
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		} finally {
+			try {
+				if (rqt != null) {
+					rqt.close();
+					this.connection = null;
+				}
+				if (cnx != null) {
+					cnx.close();
+					this.connection = null;
+				}
+			} catch (SQLException e) {
+				throw new DaoException(e.getMessage(), e);
+			}
+		}
+		return listePromo;
 	}
 
 }
