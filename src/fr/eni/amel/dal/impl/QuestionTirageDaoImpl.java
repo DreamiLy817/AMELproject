@@ -144,9 +144,9 @@ public Connection getConnection() throws SQLException
 				question_tirage.setNumordre(rs.getInt("numordre"));
 				
 				//Ajouter epreuve
-//				EpreuveDaoImpl epreuveDAO = EpreuveDaoImpl.getInstance();
-//				Epreuve epreuve = (Epreuve)epreuveDAO.selectById(rs.getInt("idEpreuve"));
-//				question_tirage.setEpreuve(epreuve);
+				//EpreuveDaoImpl epreuveDAO = EpreuveDaoImpl.getInstance();
+				//Epreuve epreuve = (Epreuve)epreuveDAO.selectById(rs.getInt("idEpreuve"));
+				//question_tirage.setEpreuve(epreuve);
 								
 				//Ajouter question
 				QuestionDaoImpl questionDAO = QuestionDaoImpl.getInstance();

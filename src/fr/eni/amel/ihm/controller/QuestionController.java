@@ -1,6 +1,7 @@
 package fr.eni.amel.ihm.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,9 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.amel.bll.manager.EpreuveManager;
 import fr.eni.amel.bll.manager.QuestionManager;
+import fr.eni.amel.bll.manager.impl.EpreuveManagerImpl;
 import fr.eni.amel.bll.manager.impl.QuestionManagerImpl;
+import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Question;
+import fr.eni.amel.dal.EpreuveDAO;
+import fr.eni.amel.dal.factory.DaoFactory;
+import fr.eni.tp.web.common.dal.exception.DaoException;
 
 /**
  * Servlet implementation class QuestionController
@@ -37,10 +44,23 @@ public class QuestionController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		QuestionManager questionManager =  QuestionManagerImpl.getInstance();
-		Question question = questionManager.getQuestion(1);
+		int numero = 0;
+		if (request.getParameter("no") != null) {
+			numero = Integer.parseInt(request.getParameter("no"));
+		}
 		
-        request.setAttribute("question", question);
+		QuestionManager questionManager =  QuestionManagerImpl.getInstance();
+		List<Question> questions = questionManager.getQuestionEpreuve(1);
+		
+		if(numero > questions.size()-1 || numero < 0)
+		{
+			numero = 0;
+		}
+		
+        request.setAttribute("question", questions.get(numero));
+        request.setAttribute("propositions", questions.get(numero).getListePropositions());
+        request.setAttribute("nbQuestion", questions.size() -1);
+        
         request.getRequestDispatcher("/forward/question").forward(request, response);
 	}
 
