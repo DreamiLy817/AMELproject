@@ -10,6 +10,9 @@
 	<title>Question 1</title>
 	</head>
 		<body>
-			Question 1 : ${question.enonce}
+		Questions : ${question.enonce}	</br>	
+			<c:forEach items="${propositions}" var="proposition">
+					   ${proposition.enonce}</br>
+			</c:forEach>
 		</body>
 	</html>
