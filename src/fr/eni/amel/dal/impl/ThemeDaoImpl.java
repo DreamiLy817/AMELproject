@@ -180,6 +180,7 @@ public class ThemeDaoImpl  implements ThemeDao{
 				e.printStackTrace();
 			}
 		}
+		this.connection = null;
 		return theme;
 	}
 
