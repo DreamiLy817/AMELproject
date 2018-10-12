@@ -12,6 +12,7 @@ import fr.eni.tp.web.common.bll.exception.ManagerException;
 import fr.eni.tp.web.common.dal.exception.DaoException;
 import fr.eni.tp.web.common.util.ValidationUtil;
 
+
 public class AuthentificationManagerImpl implements AuthentificationManager {
 
 	private UtilisateurDao utilisateurDao = DaoFactory.getUtilisateurDao();
@@ -40,10 +41,12 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 		Utilisateur utilisateur = null;
 		
 		try {
+			
 			ValidationUtil.checkNotNull(mail);
 			ValidationUtil.checkNotNull(password);
 			
 			utilisateur = utilisateurDao.selectByMailAndPassword(mail, password);
+		
 			
 		} catch (DaoException e) {
 			LOGGER.error("Erreur DAO en récupérant l'email et le mot de passe", e);
@@ -52,6 +55,10 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 		}
 		
 		return utilisateur;
+	}
+	
+	private void hashSHA256(String password) {
+		
 	}
 	
 	
