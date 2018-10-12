@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<display-name>AMELproject</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>AMELproject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
 
   <!-- Servlets -->
   <servlet-mapping>
@@ -34,6 +31,16 @@
 		<servlet-name>showQuestion</servlet-name>
 		<url-pattern>/forward/question</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+   		<servlet-name>reponseController</servlet-name>
+    	<url-pattern>/reponse/save</url-pattern>
+  	</servlet-mapping>
+  
+  <servlet>
+    <servlet-name>reponseController</servlet-name>
+    <servlet-class>fr.eni.amel.ihm.controller.ReponseController</servlet-class>
+  </servlet>
 
 	<!-- CONTROLLER TEST -->
 	<servlet-mapping>
@@ -66,5 +73,5 @@
 		<servlet-name>confirmTest</servlet-name>
 		<url-pattern>/test/confirm</url-pattern>
 	</servlet-mapping>
-
+	
 </web-app>
