@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.eni.amel.bll.manager.UtilisateurManager;
+import fr.eni.amel.bo.Promotion;
+import fr.eni.amel.bo.Test;
 import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
@@ -179,7 +181,40 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
         	throw new ManagerException("L'id ne peut être null", e);
         }
 		
-		
-		
+	}
+	
+	/**
+	 * 
+	 * @param recherche un candidat
+	 * @return
+	 */
+	public List<Utilisateur> getRechercheCandidat(String recherche) {
+		List<Utilisateur>  listeCandidat = null;
+		try {
+			listeCandidat =  utilisateurDao.rechercherCandidat(recherche);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		StringBuffer sb = new StringBuffer();
+		for (Utilisateur candidat : listeCandidat) {
+			sb.append(" Nom [nom = ");
+			sb.append(candidat.getNom());
+			sb.append(" ,Prenom = ");
+			sb.append(candidat.getPrenom());
+			sb.append(" ,email = ");
+			sb.append(candidat.getEmail());
+			sb.append(" ,password = ");
+			sb.append(candidat.getPassword());
+			sb.append(" ,code Profil = ");
+			sb.append(candidat.getProfil());
+			sb.append(" ,code Promo = ");
+			sb.append(candidat.getPromo()).append("]\n");
+		}
+		System.out.println(sb);
+	
+		return listeCandidat;
+			
 	}
 }
