@@ -25,7 +25,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 	private static final String UPDATE_UTIL_QUERY = "UPDATE UTILISATEUR SET nom=?, prenom=?, email=?, password=?, codeProfil=?, codePromo=? WHERE idUtilisateur = ?";
 	private static final String DELETE_UTIL_QUERY = "DELETE FROM UTILISATEUR WHERE idUtilisateur = ?";
 	private static final String SELECT_UTIL_BY_EMAIL_PASSWORD = "SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.codeProfil, u.codePromo FROM UTILISATEUR u WHERE u.email = ? and u.password = ?";
-	private static final String RECHERCHE_UTIL_QUERY = "SELECT  * FROM UTILISATEUR WHERE nom LIKE ? or prenom LIKE ? ORDER BY idUtilisateur ASC";
+	private static final String RECHERCHE_UTIL_QUERY = "SELECT  * FROM UTILISATEUR WHERE nom LIKE ? or prenom LIKE ? and codeProfil = 3 ORDER BY idUtilisateur ASC";
 	
 	private Connection connection;
 	private static UtilisateurDaoImpl instance;

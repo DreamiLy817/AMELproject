@@ -36,7 +36,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 	}
 	
 	@Override
-	public Utilisateur getAuthentification(String mail, String password) throws ManagerException, FunctionalException{
+	public Utilisateur getAuthentification(String mail, String password) {
 		
 		
 		Utilisateur utilisateur = null;

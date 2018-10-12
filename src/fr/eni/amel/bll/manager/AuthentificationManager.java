@@ -6,7 +6,7 @@ import fr.eni.tp.web.common.exception.FunctionalException;
 
 public interface AuthentificationManager {
 
-	public Utilisateur getAuthentification(String mail, String password) throws ManagerException, FunctionalException;
+	public Utilisateur getAuthentification(String mail, String password);
 	
 	
 }

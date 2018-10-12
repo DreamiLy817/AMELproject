@@ -59,26 +59,17 @@ public class AuthentificationController extends HttpServlet{
 		String mail = request.getParameter("identifiant");
 		String password = request.getParameter("password");
 		
-		try {
+		Utilisateur utilisateur = authentificationManager.getAuthentification(mail, password);
+		
+		if (utilisateur != null) {
+			request.setAttribute("utilisateur", utilisateur.getIdUtilisateur());
 			
-			Utilisateur utilisateur = authentificationManager.getAuthentification(mail, password);
-			
-			request.setAttribute("identifiant", utilisateur.getEmail());
-			request.setAttribute("password", utilisateur.getPassword());
-			
+			// redirige vers page de tests
+			request.getRequestDispatcher("/tests/show").forward(request, response);
+		} else {
+			// redirige vers l'authentification
 			request.getRequestDispatcher("/authentification").forward(request, response);
-		} catch (ElementNotFoundException e) {
-        	LOGGER.info("Erreur Fonctionnelle", e);
-        	request.getRequestDispatcher("/").forward(request, response);
-            
-        } catch (IllegalArgumentException | FunctionalException e) {
-        	LOGGER.error("Erreur de validation", e);
-            response.sendError(HttpStatus.BAD_REQUEST, "Identifiants incorrects");
-        	
-        } catch (Exception e) {
-        	LOGGER.error("Erreur technique", e);
-            response.sendError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-        }
+		}
 		
 	}
 
