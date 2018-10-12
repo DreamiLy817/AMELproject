@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.eni.amel.bll.manager.UtilisateurManager;
+import fr.eni.amel.bo.Promotion;
 import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
@@ -179,7 +180,25 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
         	throw new ManagerException("L'id ne peut être null", e);
         }
 		
+	}
+	
+	/**
+	 * 
+	 * @param recherche un candidat
+	 * @return
+	 */
+	public List<Utilisateur> getRechercheCandidat(String recherche) {
+		List<Utilisateur>  listeCandidat = null;
+		try {
+			listeCandidat =  utilisateurDao.rechercherCandidat(recherche);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
+		System.out.println(listeCandidat);
+	
+		return listeCandidat;
+			
 	}
 }

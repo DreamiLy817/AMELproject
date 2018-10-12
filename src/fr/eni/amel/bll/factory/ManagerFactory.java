@@ -19,5 +19,6 @@ public class ManagerFactory {
 	
 	public static PromotionManager promotionManager() {
 		return PromotionManagerImpl.getInstance();
-	}	
+	}
+	
 }
