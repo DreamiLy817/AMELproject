@@ -55,7 +55,7 @@ public class QuestionController extends HttpServlet {
 		}
 		
 		QuestionManager questionManager =  QuestionManagerImpl.getInstance();
-		List<Question> questions = questionManager.getQuestionEpreuve(idEpreuve);
+		List<Question> questions = questionManager.getQuestionEpreuve(1);
 		
 		if(numero > questions.size()-1 || numero < 0)
 		{
