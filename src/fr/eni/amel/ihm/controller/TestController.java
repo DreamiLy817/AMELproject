@@ -48,10 +48,24 @@ public class TestController extends HttpServlet {
 		 response.sendError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		 }
 	}
-
+	/**
+	 * m�thode qui sert � 
+	 * - soit � afficher les �preuves d'un utilisateur 
+	 * 		(gr�ce � l'attribut action avec pour valeur login)
+	 * - soit � confirmer  l'�preuve s�lectionn�e
+	 * 
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+
+		// r�cup�re l'attribut action du formulaire
+		String action = request.getParameter("action");
+		// v�rification attribut action si = "login"
+		if ("login".equals(action))  {
+			doGet(request, response);
+			return;
+		} 
+
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);

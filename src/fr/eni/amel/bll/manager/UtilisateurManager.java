@@ -8,6 +8,7 @@ import fr.eni.tp.web.common.exception.FunctionalException;
 
 public interface UtilisateurManager {
 
+	
 	List<Utilisateur> getAllUtilisateurs() throws ManagerException, FunctionalException;
 	
 	Utilisateur getUtilisateurById(Integer id) throws ManagerException, FunctionalException;
