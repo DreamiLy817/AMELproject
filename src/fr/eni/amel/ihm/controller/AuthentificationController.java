@@ -45,7 +45,7 @@ public class AuthentificationController extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/login").forward(request, response);
+		request.getRequestDispatcher("/authentification").forward(request, response);
 		
 	}
 
@@ -62,13 +62,14 @@ public class AuthentificationController extends HttpServlet{
 		Utilisateur utilisateur = authentificationManager.getAuthentification(mail, password);
 		
 		if (utilisateur != null) {
-			request.setAttribute("utilisateur", utilisateur.getIdUtilisateur());
+			request.getSession().setAttribute("utilisateur", utilisateur.getIdUtilisateur());
 			
 			// redirige vers page de tests
 			request.getRequestDispatcher("/tests/show").forward(request, response);
 		} else {
 			// redirige vers l'authentification
 			request.getRequestDispatcher("/authentification").forward(request, response);
+			
 		}
 		
 	}

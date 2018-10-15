@@ -50,7 +50,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 		
 			
 		} catch (DaoException e) {
-			LOGGER.error("Les idnetifiants que vous avez saisis sont incorrects.", e);
+			LOGGER.error("Les identifiants que vous avez saisis sont incorrects.", e);
 			
 			e.printStackTrace();
 		}
