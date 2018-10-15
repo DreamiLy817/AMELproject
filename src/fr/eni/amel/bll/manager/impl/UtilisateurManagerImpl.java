@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.eni.amel.bll.manager.UtilisateurManager;
-import fr.eni.amel.bo.Promotion;
-import fr.eni.amel.bo.Test;
 import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;

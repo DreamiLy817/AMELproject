@@ -150,13 +150,11 @@ public class EpreuveDaoImpl implements EpreuveDAO {
 		PreparedStatement rqt = null;
 		ResultSet rs = null;
 		List<Epreuve> epreuves = new ArrayList();
-		
 		try {
 			cnx = getConnection();
 			rqt = cnx.prepareStatement(select_utilisateur);
 			rqt.setInt(1, (int) id);
 			rs = rqt.executeQuery();
-			
 			// SI on trouve au moins 1 résultat, on prend le 1er pour mettre à
 			// jour les informations de l'animateur utilis� pour la recherche.
 			while (rs.next()) {
