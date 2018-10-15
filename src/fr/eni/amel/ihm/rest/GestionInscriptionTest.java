@@ -26,13 +26,13 @@ public class GestionInscriptionTest {
 	}
 
 	@PUT
-	@Path("/{id:\\d+}")
-	public void modifierCandidat(int id) {
-		
-		Utilisateur candidat = ManagerFactory.utilisateurManager().updateUtilisateur(id);
-	
-		
-	}
+//	@Path("/{id:\\d+}")
+//	public void modifierCandidat(int id) {
+//		
+//		Utilisateur candidat = ManagerFactory.utilisateurManager().updateUtilisateur(id);
+//	
+//		
+//	}
 	
 	
 	@POST 
