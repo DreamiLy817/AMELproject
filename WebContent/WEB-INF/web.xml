@@ -23,7 +23,7 @@
 		<servlet-name>questionController</servlet-name>
 		<url-pattern>/question/show</url-pattern>
 		<url-pattern>/question</url-pattern>
-	</servlet-mapping>
+  </servlet-mapping>
   
 	<servlet>
 		<servlet-name>questionController</servlet-name>
