@@ -85,6 +85,30 @@
 		<servlet-class>fr.eni.amel.ihm.controller.TestController</servlet-class>
 	</servlet>
 
+
+<!-- CONTROLLER TEST -->
+	<servlet-mapping>
+		<servlet-name>ResultatController</servlet-name>
+		<url-pattern>/results/show</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultatController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.ResultatController</servlet-class>
+	</servlet>
+	
+	
+	<!-- JSP RESULT -->
+	<servlet>
+		<servlet-name>showResults</servlet-name>
+		<jsp-file>/results.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>showResults</servlet-name>
+		<url-pattern>/forward/results</url-pattern>
+	</servlet-mapping>
+	
 	<!-- JSP TEST -->
 	<servlet>
 		<servlet-name>showTests</servlet-name>

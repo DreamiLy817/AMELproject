@@ -12,6 +12,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Mes Tests</a>
       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="#">Mes Résultats</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">Deconnexion</a>
       </li>
