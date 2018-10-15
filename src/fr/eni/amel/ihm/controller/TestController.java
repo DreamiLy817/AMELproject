@@ -32,9 +32,12 @@ public class TestController extends HttpServlet {
 
 		// R�cup�rer l'identifiant de l'utilisateur dans la session
 
+		int idUtilisateur = (int) request.getSession().getAttribute("utilisateur");
+		
 		// Lister les tests pour l'utilisateur
 
-		List<Epreuve> epreuves = epreuveManager.listerEpreuvesPourUtilisateur(2);
+		List<Epreuve> epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+
 
 		request.setAttribute("epreuves", epreuves);
 
