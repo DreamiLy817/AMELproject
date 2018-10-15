@@ -44,14 +44,13 @@ public class QuestionController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idEpreuve = 1;
 		int numero = 0;
 		if (request.getParameter("no") != null) {
 			numero = Integer.parseInt(request.getParameter("no"));
 		}
 		
 		QuestionManager questionManager =  QuestionManagerImpl.getInstance();
-		List<Question> questions = questionManager.getQuestionEpreuve(idEpreuve);
+		List<Question> questions = questionManager.getQuestionEpreuve(1);
 		
 		if(numero > questions.size()-1 || numero < 0)
 		{
@@ -59,7 +58,6 @@ public class QuestionController extends HttpServlet {
 		}
 		
         request.setAttribute("question", questions.get(numero));
-        request.setAttribute("idEpreuve", idEpreuve);
         request.setAttribute("propositions", questions.get(numero).getListePropositions());
         request.setAttribute("nbQuestion", questions.size() -1);
         
