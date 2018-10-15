@@ -34,29 +34,29 @@ public class TestController extends HttpServlet {
 		// R�cup�rer l'identifiant de l'utilisateur dans la session
 
 		int idUtilisateur = (int) request.getSession().getAttribute("utilisateur");
-		
+
 		// Lister les tests pour l'utilisateur
 
 		List<Epreuve> epreuves;
 		try {
 			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
 			request.setAttribute("epreuves", epreuves);
-			if(epreuves.isEmpty()){
+			if (epreuves.isEmpty()) {
 				request.setAttribute("infoMessage", "il n'y a pas d'épreuves pour l'instant");
 			}
+			request.getRequestDispatcher("/forward/tests").forward(request, response);
 		} catch (ManagerException e) {
 			LOGGER.info("erreur survenue pendant affichage des épreuves d'un utilisateur");
 			request.setAttribute("error", e);
-			request.getRequestDispatcher("/technicalError");
+			response.sendRedirect("/AMELproject/technicalError");
 		}
-		request.getRequestDispatcher("/forward/tests").forward(request, response);
 
 	}
+
 	/**
-	 * m�thode qui sert � 
-	 * - soit � afficher les �preuves d'un utilisateur 
-	 * 		(gr�ce � l'attribut action avec pour valeur login)
-	 * - soit � confirmer  l'�preuve s�lectionn�e
+	 * m�thode qui sert � - soit � afficher les �preuves d'un utilisateur (gr�ce
+	 * � l'attribut action avec pour valeur login) - soit � confirmer l'�preuve
+	 * s�lectionn�e
 	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -65,15 +65,15 @@ public class TestController extends HttpServlet {
 		// r�cup�re l'attribut action du formulaire
 		String action = request.getParameter("action");
 		// v�rification attribut action si = "login"
-		if ("login".equals(action))  {
+		if ("login".equals(action)) {
 			doGet(request, response);
 			return;
-		} 
+		}
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
 		request.setAttribute("dureeEpreuve", dureeEpreuve);
-		
+
 		request.getRequestDispatcher("/test/confirm").forward(request, response);
 	}
 
@@ -85,8 +85,9 @@ public class TestController extends HttpServlet {
 		try {
 			listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
 		} catch (ManagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.info("erreur survenue pendant le tirage au sort des questions d'une épreuve");
+			request.setAttribute("error", e);
+			response.sendRedirect("/AMELproject/technicalError");
 		}
 		request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
 		request.getRequestDispatcher("/question/show").forward(request, response);

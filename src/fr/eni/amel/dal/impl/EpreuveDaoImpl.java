@@ -20,7 +20,7 @@ public class EpreuveDaoImpl implements EpreuveDAO {
 
 	private static final String select_all = "SELECT * FROM EPREUVE";
 	private static final String select_id = "SELECT * FROM EPREUVE WHERE idEpreuve = ?";
-	private static final String select_utilisateur = "SELECT * FROM EPREUVE WHERE idUtilisateur = ";
+	private static final String select_utilisateur = "SELECT * FROM EPREUVE WHERE idUtilisateur = ?";
 	private static final String update_id = "UPDATE EPREUVE SET dateDedutValidite = ?, dateFinValidite = ?, tempsEcoule = ?, etat = ?, note_obtenue = ? WHERE idEpreuve = ?";
 	private static final String insert = "INSERT INTO EPREUVE (dateDedutValidite, dateFinValidite, tempsEcoule, etat, note_obtenue, niveau_obtenu, idTest, idUtilisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 

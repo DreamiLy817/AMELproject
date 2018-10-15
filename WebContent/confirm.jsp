@@ -15,6 +15,7 @@
 
 <body>
 	<div class="col-sm-12">
+		<jsp:include page="/head" />
 		<div class="col-sm-6 offset-sm-3">
 			<form action="${pageContext.request.contextPath}/question/show"
 				method="post">
@@ -27,9 +28,10 @@
 
 						<button class="btn btn-default" type="submit">Démarrer le
 							test</button>
-						
-						<a href="${pageContext.request.contextPath}/tests/show" class="btn">Revenir à la liste</a>
-					
+
+						<a href="${pageContext.request.contextPath}/tests/show"
+							class="btn">Revenir à la liste</a>
+
 					</div>
 				</fieldset>
 			</form>

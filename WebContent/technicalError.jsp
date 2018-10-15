@@ -17,9 +17,8 @@
 
 </head>
 <body>
+	<jsp:include page="/head" />
 	
-	
-
 		<div class="col-md-12">
 		
 			<h1>Oups, an error occured...</h1>

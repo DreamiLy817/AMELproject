@@ -19,6 +19,7 @@
 
 <body>
 	<div class="col-sm-12">
+	<jsp:include page="/head" />
 		<div class="col-sm-6 offset-sm-3">
 			<form action="${pageContext.request.contextPath}/tests/show"
 				method="post">
