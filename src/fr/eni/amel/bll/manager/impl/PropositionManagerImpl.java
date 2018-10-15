@@ -1,5 +1,6 @@
 package fr.eni.amel.bll.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.amel.bll.manager.PropositionManager;
@@ -78,6 +79,20 @@ public class PropositionManagerImpl implements PropositionManager{
 		}
 	
 						
+	}
+	
+	public List<Proposition> getReponseCochee(Integer idEpreuve, Integer idQuestion)
+	{
+		List<Proposition> listeReponse = new ArrayList();
+		
+		try {
+			listeReponse = DaoFactory.propositionDAO().selectReponseByEpreuveQuestion(idEpreuve, idQuestion);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listeReponse;
 	}
 
 }

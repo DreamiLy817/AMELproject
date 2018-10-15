@@ -2,6 +2,7 @@ package fr.eni.amel.ihm.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.amel.bll.manager.EpreuveManager;
+import fr.eni.amel.bll.manager.PropositionManager;
 import fr.eni.amel.bll.manager.QuestionManager;
 import fr.eni.amel.bll.manager.impl.EpreuveManagerImpl;
+import fr.eni.amel.bll.manager.impl.PropositionManagerImpl;
 import fr.eni.amel.bll.manager.impl.QuestionManagerImpl;
 import fr.eni.amel.bo.Epreuve;
+import fr.eni.amel.bo.Proposition;
 import fr.eni.amel.bo.Question;
 import fr.eni.amel.dal.EpreuveDAO;
 import fr.eni.amel.dal.factory.DaoFactory;
@@ -44,7 +48,7 @@ public class QuestionController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idEpreuve = 1;
+		Integer idEpreuve = 1;
 		int numero = 0;
 		if (request.getParameter("no") != null) {
 			numero = Integer.parseInt(request.getParameter("no"));
@@ -58,11 +62,32 @@ public class QuestionController extends HttpServlet {
 			numero = 0;
 		}
 		
+		PropositionManager propositionManager =  PropositionManagerImpl.getInstance();
+		List<Proposition> listPropositionsCoche = propositionManager.getReponseCochee(idEpreuve, questions.get(numero).getIdQuestion());
+		
+		List<Proposition> newlist = new ArrayList<Proposition>(); 
+		
+		for(Proposition proposition: questions.get(numero).getListePropositions()) {
+			
+			for(Proposition prop: listPropositionsCoche) {
+				
+				if(prop.getIdProposition() == proposition.getIdProposition())
+				{
+					proposition.setEstCoche(true);
+				}
+			}
+			
+			newlist.add(proposition);
+			
+		}
+		
+		questions.get(numero).setListePropositions(newlist);
+		
+		request.setAttribute("numero", numero);
         request.setAttribute("question", questions.get(numero));
         request.setAttribute("idEpreuve", idEpreuve);
-        request.setAttribute("propositions", questions.get(numero).getListePropositions());
         request.setAttribute("nbQuestion", questions.size() -1);
-        
+
         request.getRequestDispatcher("/forward/question").forward(request, response);
 	}
 
