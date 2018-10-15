@@ -20,16 +20,22 @@
 <body>
 	<div class="col-sm-12">
 		<div class="col-sm-6 offset-sm-3">
-			<form action="${pageContext.request.contextPath}/tests/show" method="post">
+			<form action="${pageContext.request.contextPath}/tests/show"
+				method="post">
 				<fieldset class="scheduler-border">
 					<legend class="scheduler-border">Tests à effectuer</legend>
 					<div class="control-group">
-
+						<c:if test="${infoMessage != null}">
+							<div class="alert alert-info mt-5">${infoMessage}</div>
+						</c:if>
 
 						<c:forEach items="${epreuves}" var="epreuve">
-							<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}"/>
-							<input type="hidden" name="libelleEpreuve" value="${ epreuve.test.libelle}"/>
-							<input type="hidden" name="dureeEpreuve" value="${epreuve.test.duree }"/>
+							<input type="hidden" name="idEpreuve"
+								value="${epreuve.idEpreuve}" />
+							<input type="hidden" name="libelleEpreuve"
+								value="${ epreuve.test.libelle}" />
+							<input type="hidden" name="dureeEpreuve"
+								value="${epreuve.test.duree }" />
 							<button class="btn btn-default" type="submit">${epreuve.test.libelle}-
 								Durée du test: ${epreuve.test.duree} minutes</button>
 						</c:forEach>

@@ -41,7 +41,9 @@ public class TestController extends HttpServlet {
 		try {
 			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
 			request.setAttribute("epreuves", epreuves);
-			
+			if(epreuves.isEmpty()){
+				request.setAttribute("infoMessage", "il n'y a pas d'épreuves pour l'instant");
+			}
 		} catch (ManagerException e) {
 			LOGGER.info("erreur survenue pendant affichage des épreuves d'un utilisateur");
 			request.setAttribute("error", e);
@@ -79,7 +81,7 @@ public class TestController extends HttpServlet {
 			throws ServletException, IOException {
 		String idEpreuve = request.getParameter("idEpreuve");
 		Integer id = Integer.parseInt(idEpreuve);
-		List<Question> listeQuestionsTireesAuSort;
+		List<Question> listeQuestionsTireesAuSort = null;
 		try {
 			listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
 		} catch (ManagerException e) {
