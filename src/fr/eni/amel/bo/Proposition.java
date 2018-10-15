@@ -1,11 +1,14 @@
 package fr.eni.amel.bo;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class Proposition {
 
 	private Integer idProposition;
 	private String enonce;
 	private Boolean estBonne;
 	private Question question;
+	private Boolean estCoche;
 
 	public Proposition() {
 
@@ -51,6 +54,14 @@ public class Proposition {
 		this.question = question;
 	}
 
+	public Boolean getEstCoche() {
+		return this.estCoche; 
+	}
+	
+	public void setEstCoche(Boolean coche) {
+		this.estCoche = coche;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Proposition [idProposition=%s, enonce=%s, estBonne=%s, question=%s]", idProposition,

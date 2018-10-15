@@ -51,6 +51,7 @@ public class ReponseController extends HttpServlet {
 		
 		int idEpreuve = Integer.parseInt(request.getParameter("hid_idEpreuve"));
 		int idQuestion = Integer.parseInt(request.getParameter("hid_idQuestion"));
+		int numero = Integer.parseInt(request.getParameter("hid_no")) + 1;
 		QuestionTirageManager questionTirageManager =  QuestionTirageManagerImpl.getInstance();
 		QuestionTirage questionTirage = questionTirageManager.getQuestionTirage(idQuestion ,idEpreuve);
 		Question question = questionTirage.getQuestion();
@@ -70,7 +71,8 @@ public class ReponseController extends HttpServlet {
 		}
 		PropositionManager propositionManager =  PropositionManagerImpl.getInstance();
 		propositionManager.Repondre(questionTirage, propositionsCochee);
-		 request.getRequestDispatcher("/question/show").forward(request, response);
+		 //request.getRequestDispatcher("/question/show").forward(request, response);
+		response.sendRedirect("/AMELproject/question/show?no="+ numero);
 	}
 
 }
