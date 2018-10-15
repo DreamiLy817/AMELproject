@@ -15,6 +15,7 @@ import fr.eni.amel.bll.factory.ManagerFactory;
 import fr.eni.amel.bll.manager.EpreuveManager;
 import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Question;
+import fr.eni.tp.web.common.bll.exception.ManagerException;
 
 public class TestController extends HttpServlet {
 
@@ -36,31 +37,32 @@ public class TestController extends HttpServlet {
 		
 		// Lister les tests pour l'utilisateur
 
-		List<Epreuve> epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
-
-
-		request.setAttribute("epreuves", epreuves);
-
+		List<Epreuve> epreuves;
+		try {
+			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+			request.setAttribute("epreuves", epreuves);
+			
+		} catch (ManagerException e) {
+			LOGGER.info("erreur survenue pendant affichage des Ã©preuves d'un utilisateur");
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/technicalError");
+		}
 		request.getRequestDispatcher("/forward/tests").forward(request, response);
 
-		// } catch (ManagerException e) {
-		// LOGGER.error("Technical Error", e);
-		// response.sendError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-		// }
 	}
 	/**
-	 * méthode qui sert à 
-	 * - soit à afficher les épreuves d'un utilisateur 
-	 * 		(grâce à l'attribut action avec pour valeur login)
-	 * - soit à confirmer  l'épreuve sélectionnée
+	 * mï¿½thode qui sert ï¿½ 
+	 * - soit ï¿½ afficher les ï¿½preuves d'un utilisateur 
+	 * 		(grï¿½ce ï¿½ l'attribut action avec pour valeur login)
+	 * - soit ï¿½ confirmer  l'ï¿½preuve sï¿½lectionnï¿½e
 	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// récupère l'attribut action du formulaire
+		// rï¿½cupï¿½re l'attribut action du formulaire
 		String action = request.getParameter("action");
-		// vérification attribut action si = "login"
+		// vï¿½rification attribut action si = "login"
 		if ("login".equals(action))  {
 			doGet(request, response);
 			return;
@@ -77,7 +79,13 @@ public class TestController extends HttpServlet {
 			throws ServletException, IOException {
 		String idEpreuve = request.getParameter("idEpreuve");
 		Integer id = Integer.parseInt(idEpreuve);
-		List<Question> listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
+		List<Question> listeQuestionsTireesAuSort;
+		try {
+			listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
 		request.getRequestDispatcher("/question/show").forward(request, response);
 	}
