@@ -11,12 +11,21 @@
 		<title>Question ${numero +1}</title>
 	</head>
 	<body>
+	<jsp:include page="/head" />
 		<div class="row">
-			<div class="col-md-3">
-				Navigation :
-				<c:forEach var="i" begin="0" end="${nbQuestion}" step="1">
-					<a href="${pageContext.request.contextPath}/question/show?no=${i}">${i + 1 }</a>
-				</c:forEach>
+			<div class="col-md-2 offset-md-1">
+				<div class="row">
+					Navigation :<br/>
+					<c:forEach var="i" begin="0" end="${nbQuestion}" step="1">
+						 	&nbsp;<a href="${pageContext.request.contextPath}/question/show?no=${i}">${i + 1 }</a>
+					</c:forEach>
+				</div>
+				<div class="row" style="margin-top:30px;">
+					<div class="form-check">
+						<input type="checkbox" id="chx_marquer" name="chx_marquer" />
+						 <label class="form-check-label" for="chx_marquer">Marquer</label>
+					</div>
+				</div>
 			</div>
 			<div class="col-md-6">
 				<form action="${pageContext.request.contextPath}/reponse/save" method="Post">

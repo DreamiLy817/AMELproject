@@ -2,7 +2,6 @@ package fr.eni.amel.ihm.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,18 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.amel.bll.manager.EpreuveManager;
 import fr.eni.amel.bll.manager.PropositionManager;
 import fr.eni.amel.bll.manager.QuestionManager;
-import fr.eni.amel.bll.manager.impl.EpreuveManagerImpl;
 import fr.eni.amel.bll.manager.impl.PropositionManagerImpl;
 import fr.eni.amel.bll.manager.impl.QuestionManagerImpl;
-import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Proposition;
 import fr.eni.amel.bo.Question;
-import fr.eni.amel.dal.EpreuveDAO;
-import fr.eni.amel.dal.factory.DaoFactory;
-import fr.eni.tp.web.common.dal.exception.DaoException;
 
 /**
  * Servlet implementation class QuestionController

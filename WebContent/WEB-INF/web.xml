@@ -110,5 +110,14 @@
 <!-- 		<servlet-name>inscriptionTest</servlet-name> -->
 <!-- 		<url-pattern>/forward/inscription-test</url-pattern> -->
 <!-- 	</servlet-mapping> -->
+
+	<servlet>
+		<servlet-name>header</servlet-name>
+		<jsp-file>/head.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>header</servlet-name>
+		<url-pattern>/head</url-pattern>
+	</servlet-mapping>
 	
 </web-app>
