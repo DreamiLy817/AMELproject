@@ -31,18 +31,16 @@ public class TestController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		try{
 		// Récupérer l'identifiant de l'utilisateur dans la session
-
 		int idUtilisateur = (int) request.getSession().getAttribute("utilisateur");
 		
 		// Lister les tests pour l'utilisateur
+
 		List<Epreuve> epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+
 		request.setAttribute("epreuves", epreuves);
-		if(epreuves.isEmpty()){
-			request.setAttribute("infoMessage", "il n'y a pas d'épreuves à passer");
-		}
+
 		request.getRequestDispatcher("/forward/tests").forward(request, response);
 
 		} catch (ManagerException e) {
@@ -72,8 +70,8 @@ public class TestController extends HttpServlet {
 			request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
 			request.getRequestDispatcher("/question/show").forward(request, response);
 		} catch (ManagerException e) {
-			 LOGGER.error("Technical Error", e);
-			 response.sendError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

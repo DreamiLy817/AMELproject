@@ -37,15 +37,19 @@ public class EpreuveManagerImpl implements EpreuveManager {
 	 * inscrit
 	 */
 	@Override
-	public List<Epreuve> listerEpreuvesPourUtilisateur(Integer idUtilisateur) throws ManagerException {
+	public List<Epreuve> listerEpreuvesPourUtilisateur(Integer idUtilisateur) {
 		List<Epreuve> listeEpreuvesUtilisateur = null;
 
 		try {
 			ValidationUtil.checkNotNull(idUtilisateur);
 			listeEpreuvesUtilisateur = epreuveDAO.selectByUtilisateur(idUtilisateur);
 		} catch (DaoException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		System.out.println(listeEpreuvesUtilisateur);
+
 		return listeEpreuvesUtilisateur;
 	}
 

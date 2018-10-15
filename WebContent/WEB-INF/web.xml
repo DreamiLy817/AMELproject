@@ -42,14 +42,14 @@
     <servlet-class>fr.eni.amel.ihm.controller.ReponseController</servlet-class>
   </servlet>
   
-<!--   <servlet> -->
-<!-- 		<servlet-name>InscriptionTestController</servlet-name> -->
-<!-- 		<servlet-class>fr.eni.amel.ihm.controller.InscriptionTestController</servlet-class> -->
-<!-- 	</servlet> -->
-<!-- 	 <servlet-mapping> -->
-<!-- 		<servlet-name>InscriptionTestController</servlet-name> -->
-<!-- 		<url-pattern>/inscription-test</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+  <servlet>
+		<servlet-name>InscriptionTestController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.InscriptionTestController</servlet-class>
+	</servlet>
+	 <servlet-mapping>
+		<servlet-name>InscriptionTestController</servlet-name>
+		<url-pattern>/inscription-test</url-pattern>
+	</servlet-mapping>
 	
   
   
@@ -86,13 +86,13 @@
 		<url-pattern>/test/confirm</url-pattern>
 	</servlet-mapping>
 	
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>inscriptionTest</servlet-name> -->
-<!-- 		<jsp-file>/inscription-test.jsp</jsp-file> -->
-<!-- 	</servlet> -->
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>inscriptionTest</servlet-name> -->
-<!-- 		<url-pattern>/forward/inscription-test</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	<servlet>
+		<servlet-name>inscriptionTest</servlet-name>
+		<jsp-file>/inscription-test.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>inscriptionTest</servlet-name>
+		<url-pattern>/forward/inscription-test</url-pattern>
+	</servlet-mapping>
 	
 </web-app>
