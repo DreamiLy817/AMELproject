@@ -3,13 +3,27 @@ package fr.eni.amel.bll.manager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.amel.bll.manager.PropositionManager;
 import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Proposition;
 import fr.eni.amel.bo.QuestionTirage;
+import fr.eni.amel.dal.PromotionDao;
 import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.tp.web.common.dal.exception.DaoException;
 
-public class PropositionManagerImpl {
+public class PropositionManagerImpl implements PropositionManager {
+	
+	
+	private static PropositionManagerImpl instance;
+	
+	
+	public static PropositionManagerImpl getInstance()
+	{
+		if (instance == null) {
+			instance = new PropositionManagerImpl();
+		}
+		return instance;
+	}
 	
 	public void Repondre(QuestionTirage questiontirage, List<Proposition> newlisteproposition){
 	
