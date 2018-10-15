@@ -1,5 +1,7 @@
 package fr.eni.amel.bll.manager.impl;
 
+import java.security.MessageDigest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +61,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 	}
 	
 	private void hashSHA256(String password) {
-		
+		password.hashCode();
 	}
 	
 	

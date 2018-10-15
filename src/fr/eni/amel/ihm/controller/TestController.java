@@ -49,8 +49,8 @@ public class TestController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String idEpreuve = request.getParameter("idEpreuve");
-		Integer id = Integer.parseInt(idEpreuve);
+//		String idEpreuve = request.getParameter("idEpreuve");
+//		Integer id = Integer.parseInt(idEpreuve);
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
