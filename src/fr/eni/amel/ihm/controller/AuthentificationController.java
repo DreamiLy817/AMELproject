@@ -65,13 +65,18 @@ public class AuthentificationController extends HttpServlet{
 			request.getSession().setAttribute("utilisateur", utilisateur.getIdUtilisateur());
 			
 			// redirige vers page de tests
-			request.getRequestDispatcher("/tests/show").forward(request, response);
+			//request.getRequestDispatcher("/tests/show").forward(request, response);
+			selectionnerTests(request, response);
 		} else {
 			// redirige vers l'authentification
 			request.getRequestDispatcher("/authentification").forward(request, response);
 			
 		}
 		
+	}
+	
+	protected void selectionnerTests(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/tests/show").forward(request, response);
 	}
 
 }

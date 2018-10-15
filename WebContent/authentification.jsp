@@ -18,7 +18,7 @@
 				<input type="email" class="form-text-input" name="identifiant">
 				<label for="password" class="form-text-label">Mot de passe :</label>
 				<input type="password" class="form-text-input" name="password">
-				<input type="submit" class="form-submit-input" value="Valider">
+				<button type="submit" class="form-submit-input" name="action" value="login">Valider</button>
 			</form>
 		</div>
 	</div>
