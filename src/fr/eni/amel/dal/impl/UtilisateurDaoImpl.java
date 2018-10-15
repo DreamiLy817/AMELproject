@@ -24,6 +24,7 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 	private static final String SELECT_ALL_UTILS = "SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.codeProfil, u.codePromo  FROM UTILISATEUR u";
 	private static final String UPDATE_UTIL_QUERY = "UPDATE UTILISATEUR SET nom=?, prenom=?, email=?, password=?, codeProfil=?, codePromo=? WHERE idUtilisateur = ?";
 	private static final String DELETE_UTIL_QUERY = "DELETE FROM UTILISATEUR WHERE idUtilisateur = ?";
+	private static final String SELECT_UTIL_BY_EMAIL_PASSWORD = "SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.codeProfil, u.codePromo FROM UTILISATEUR u WHERE u.email = ? and u.password = ?";
 	private static final String RECHERCHE_UTIL_QUERY = "SELECT  * FROM UTILISATEUR WHERE nom LIKE ? or prenom LIKE ? and codeProfil = 3 ORDER BY idUtilisateur ASC";
 	
 	private Connection connection;
@@ -260,6 +261,58 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 		}
 		
 		return listeUtilisateurs;
+	}
+	
+	public Utilisateur selectByMailAndPassword(String mail, String password) throws DaoException {
+		
+		Connection cnx = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Utilisateur utilisateur = null;
+		
+		try {
+			cnx = getConnection();
+			stmt = cnx.prepareStatement(SELECT_UTIL_BY_EMAIL_PASSWORD);
+			stmt.setString(1, mail);
+			stmt.setString(2, password);
+			rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				utilisateur = new Utilisateur();
+				utilisateur.setIdUtilisateur(rs.getInt("idUtilisateur"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(mail);
+				utilisateur.setPassword(password);
+				
+				ProfilDaoImpl profilDao = ProfilDaoImpl.getInstance();
+				Profil profil = (Profil)profilDao.selectById(rs.getInt("codeProfil"));
+				utilisateur.setProfil(profil);
+				
+				PromotionDaoImpl promoDao = PromotionDaoImpl.getInstance();
+				Promotion promo = (Promotion)promoDao.selectById(rs.getInt("codePromo"));
+				utilisateur.setPromo(promo);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		} finally {
+			ResourceUtil.safeClose(rs, stmt);
+			try {
+				if (cnx != null) {	
+					cnx.close();
+					this.connection = null;
+				} 
+			} catch (SQLException e) {
+				throw new DaoException(e.getMessage(), e);
+				
+			}
+		}
+		
+		return utilisateur;
+		
 	}
 
 	@Override

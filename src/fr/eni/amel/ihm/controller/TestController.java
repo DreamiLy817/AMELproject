@@ -48,19 +48,28 @@ public class TestController extends HttpServlet {
 		// response.sendError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		// }
 	}
-
+	/**
+	 * méthode qui sert à 
+	 * - soit à afficher les épreuves d'un utilisateur 
+	 * 		(grâce à l'attribut action avec pour valeur login)
+	 * - soit à confirmer  l'épreuve sélectionnée
+	 * 
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String idEpreuve = request.getParameter("idEpreuve");
-		Integer id = Integer.parseInt(idEpreuve);
+
+		// récupère l'attribut action du formulaire
+		String action = request.getParameter("action");
+		// vérification attribut action si = "login"
+		if ("login".equals(action))  {
+			doGet(request, response);
+			return;
+		} 
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
 		request.setAttribute("dureeEpreuve", dureeEpreuve);
-		// List<Question> listeQuestionsTireesAuSort =
-		// epreuveManager.tirerAuSortQuestions(id);
-		// request.setAttribute("listeQuestionsTireesAuSort",
-		// listeQuestionsTireesAuSort);
+		
 		request.getRequestDispatcher("/test/confirm").forward(request, response);
 	}
 
