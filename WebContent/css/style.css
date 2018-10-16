@@ -14,25 +14,6 @@
     border:0;
     background:transparent;
 }
-
-#inscription-test .parametre-block {
-	display: flex;
-	
-}
-
-#inscription-test .parametre-block .search-block, #inscription-test .parametre-block .selection-block {
-	width: 50%;
-	padding: 0 10px;
-}
-
-#inscription-test .candidat-block {
-	display: flex;
-}
-
-#inscription-test .candidat-block .candidatTrouve-block, #inscription-test .candidat-block .candidatInscrit-block {
-	width: 50%;
-	padding: 0 10px;
-}
 fieldset.scheduler-border {
     border: 1px groove #ddd !important;
     padding: 0 1.4em 1.4em 1.4em !important;
@@ -45,4 +26,8 @@ legend.scheduler-border {
     font-size: 1.2em !important;
     font-weight: bold !important;
     text-align: left !important;
+}
+
+#candidatTrouve {
+	height: 500px;
 }

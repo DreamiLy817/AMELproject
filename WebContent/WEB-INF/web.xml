@@ -53,26 +53,25 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>reponseController</servlet-name>
-		<url-pattern>/reponse/save</url-pattern>
-	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>reponseController</servlet-name>
-		<servlet-class>fr.eni.amel.ihm.controller.ReponseController</servlet-class>
+   		<servlet-name>reponseController</servlet-name>
+    	<url-pattern>/reponse/save</url-pattern>
+  	</servlet-mapping>
+  
+  <servlet>
+    <servlet-name>reponseController</servlet-name>
+    <servlet-class>fr.eni.amel.ihm.controller.ReponseController</servlet-class>
+  </servlet>
+  
+   <servlet> 
+		<servlet-name>InscriptionTestController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.InscriptionTestController</servlet-class>
 	</servlet>
-
-	<!-- <servlet> -->
-	<!-- <servlet-name>InscriptionTestController</servlet-name> -->
-	<!-- <servlet-class>fr.eni.amel.ihm.controller.InscriptionTestController</servlet-class> -->
-	<!-- </servlet> -->
-	<!-- <servlet-mapping> -->
-	<!-- <servlet-name>InscriptionTestController</servlet-name> -->
-	<!-- <url-pattern>/inscription-test</url-pattern> -->
-	<!-- </servlet-mapping> -->
-
-
-
+	 <servlet-mapping>
+		<servlet-name>InscriptionTestController</servlet-name>
+		<url-pattern>/inscription-test</url-pattern>
+	</servlet-mapping>
+	
 
 	<!-- CONTROLLER TEST -->
 	<servlet-mapping>
@@ -143,6 +142,14 @@
 
 	
 	<servlet>
+		<servlet-name>inscriptionTest</servlet-name>
+		<jsp-file>/inscription-test.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>inscriptionTest</servlet-name>
+		<url-pattern>/forward/inscription-test</url-pattern>
+		</servlet-mapping>
+		<servlet>
 		<servlet-name>header</servlet-name>
 		<jsp-file>/head.jsp</jsp-file>
 	</servlet>
