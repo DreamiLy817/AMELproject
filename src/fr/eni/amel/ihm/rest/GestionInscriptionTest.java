@@ -19,25 +19,26 @@ public class GestionInscriptionTest {
 	}
 	
 	
-	@GET
-	public List<Utilisateur> getCandidats() {
-		List<Utilisateur> candidats = ManagerFactory.utilisateurManager().getAllUtilisateurs();
-		return candidats;
-	}
-
-	@PUT
-//	@Path("/{id:\\d+}")
-//	public void modifierCandidat(int id) {
-//		
-//		Utilisateur candidat = ManagerFactory.utilisateurManager().updateUtilisateur(id);
-//	
-//		
+//	@GET
+//	public List<Utilisateur> getCandidats() {
+//		List<Utilisateur> candidats = ManagerFactory.utilisateurManager().getAllUtilisateurs();
+//		return candidats;
 //	}
+//
+//	@PUT
+////	@Path("/{id:\\d+}")
+////	public void modifierCandidat(int id) {
+////		
+////		Utilisateur candidat = ManagerFactory.utilisateurManager().updateUtilisateur(id);
+////	
+////		
+////	}
+//	
+//	
+//	@POST 
+//	
+//	@DELETE
 	
-	
-	@POST 
-	
-	@DELETE
 	
 
 }
