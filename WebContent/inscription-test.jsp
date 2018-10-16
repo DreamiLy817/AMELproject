@@ -47,22 +47,19 @@
 		</div>
 		<div class="search-block">
 			<p>Rechercher les candidats</p>
-			<form action="${pageContext.request.contextPath}/login/validerAcces"
-				method="post">
 				<div class="input-group stylish-input-group">
-					<input type="text" class="form-control" placeholder="Search">
+					<input type="text" class="form-control" placeholder="Search" id="search-input">
 					<span class="input-group-addon">
-						<button type="submit">ok</button>
+						<button onclick="searchFunction()">ok</button>
 					</span>
 				</div>
-			</form>
 		</div>
 		<div class="candidat-block">
 			<div class="candidatTrouve-block">
 				<form>
 					<div class="form-group">
-						<label for="candidatTrouve">Candidats</label> <select
-							multiple class="form-control" id="candidatTrouve">
+						<label for="candidatTrouve">Candidats</label> 
+						<select multiple class="form-control" id="candidatTrouve">
 							<c:forEach items="${candidats}" var="candidat">
 						<option value="${candidat.idUtilisateur}">${candidat.prenom} ${candidat.nom}</option>
 					</c:forEach>
@@ -71,7 +68,32 @@
 				</form>
 			</div>
 		</div>
-
 	</div>
+	<script type="text/javascript">
+	
+		function searchFunction() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				var info = xhttp.responseText;
+				var parent = document.getElementById("candidatTrouve");
+				 parent.innerHTML = "";
+				
+				$.each(JSON.parse(info), function(i, candidat) {
+					 parent.innerHTML += "<option>" + candidat.nom + " " + candidat.prenom + "</option>";
+					});
+
+
+				}
+			};
+			var libelleRecherche = "http://localhost:8080/AMELproject/rest/inscription-test/candidats?recherche=" + document.getElementById("search-input").value;
+			xhttp.open(
+							"GET",
+							libelleRecherche,
+							true);
+			xhttp.send();
+		}
+	</script>
+
 </body>
 </html>

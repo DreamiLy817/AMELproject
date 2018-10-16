@@ -37,7 +37,6 @@ public class InscriptionTestController extends HttpServlet {
 		
 		List<Utilisateur> listeCandidats = ManagerFactory.utilisateurManager().getRechercheCandidat("");
 		request.setAttribute("candidats", listeCandidats);
-		System.out.println(listeCandidats);
 		request.getRequestDispatcher("/forward/inscription-test").forward(request, response);
 	}
 

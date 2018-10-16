@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 
 import fr.eni.amel.bll.factory.ManagerFactory;
 import fr.eni.amel.bo.Utilisateur;
@@ -19,26 +20,19 @@ public class GestionInscriptionTest {
 	}
 	
 	
-//	@GET
-//	public List<Utilisateur> getCandidats() {
-//		List<Utilisateur> candidats = ManagerFactory.utilisateurManager().getAllUtilisateurs();
-//		return candidats;
-//	}
-//
-//	@PUT
-////	@Path("/{id:\\d+}")
-////	public void modifierCandidat(int id) {
-////		
-////		Utilisateur candidat = ManagerFactory.utilisateurManager().updateUtilisateur(id);
-////	
-////		
-////	}
-//	
-//	
-//	@POST 
-//	
-//	@DELETE
+	@GET
+	@Path("/candidats")
+	public List<Utilisateur> getCandidats(@QueryParam(value = "recherche") String recherche) {
 	
+		List<Utilisateur> candidats = ManagerFactory.utilisateurManager().getRechercheCandidat(recherche);
+		return candidats;
+	}
 	
-
+	@GET 
+	@Path("/{Test: \\d+}")
+	// recupérer la liste des candidats qui sont ne sont pas inscrit au test selectionné
+	public List<Utilisateur> getCandidatsByTest(@QueryParam(value = "idTest") int idTest, @QueryParam(value = "saisieRecherche") String saisieRecherche ) {
+		return null;
+		
+	}
 }
