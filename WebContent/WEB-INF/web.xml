@@ -46,48 +46,110 @@
     <servlet-name>reponseController</servlet-name>
     <url-pattern>/reponse/save</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>reponseController</servlet-name>
-    <servlet-class>fr.eni.amel.ihm.controller.ReponseController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestController</servlet-name>
-    <url-pattern>/tests/show</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>TestController</servlet-name>
-    <servlet-class>fr.eni.amel.ihm.controller.TestController</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>showTests</servlet-name>
-    <jsp-file>/tests.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>showTests</servlet-name>
-    <url-pattern>/forward/tests</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>confirmTest</servlet-name>
-    <jsp-file>/confirm.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>confirmTest</servlet-name>
-    <url-pattern>/test/confirm</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>header</servlet-name>
-    <jsp-file>/head.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>header</servlet-name>
-    <url-pattern>/head</url-pattern>
-  </servlet-mapping>
-  <filter>
-    <filter-name>Filtre</filter-name>
-    <filter-class>fr.eni.amel.ihm.controller.Filtre</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>Filtre</filter-name>
-    <url-pattern>/question/*</url-pattern>
-  </filter-mapping>
+	<servlet-mapping>
+		<servlet-name>questionController</servlet-name>
+		<url-pattern>/question/show</url-pattern>
+		<url-pattern>/question</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>showQuestion</servlet-name>
+		<url-pattern>/forward/question</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+   		<servlet-name>reponseController</servlet-name>
+    	<url-pattern>/reponse/save</url-pattern>
+  	</servlet-mapping>  
+  	
+   <servlet> 
+		<servlet-name>InscriptionTestController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.InscriptionTestController</servlet-class>
+	</servlet>
+	 <servlet-mapping>
+		<servlet-name>InscriptionTestController</servlet-name>
+		<url-pattern>/inscription-test</url-pattern>
+	</servlet-mapping>
+	
+
+	<!-- CONTROLLER TEST -->
+	<servlet-mapping>
+		<servlet-name>TestController</servlet-name>
+		<url-pattern>/tests/show</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TestController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.TestController</servlet-class>
+	</servlet>
+
+
+<!-- CONTROLLER TEST -->
+	<servlet-mapping>
+		<servlet-name>ResultatController</servlet-name>
+		<url-pattern>/results/show</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ResultatController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.ResultatController</servlet-class>
+	</servlet>
+	
+	
+	<!-- JSP RESULT -->
+	<servlet>
+		<servlet-name>showResults</servlet-name>
+		<jsp-file>/results.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>showResults</servlet-name>
+		<url-pattern>/forward/results</url-pattern>
+	</servlet-mapping>
+	
+	<!-- JSP TEST -->
+	<servlet>
+		<servlet-name>showTests</servlet-name>
+		<jsp-file>/tests.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>showTests</servlet-name>
+		<url-pattern>/forward/tests</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>confirmTest</servlet-name>
+		<jsp-file>/confirm.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>confirmTest</servlet-name>
+		<url-pattern>/test/confirm</url-pattern>
+	</servlet-mapping>
+
+	<!-- JSP TECHNICAL ERROR -->
+	<servlet>
+		<servlet-name>technicalError</servlet-name>
+		<jsp-file>/technicalError.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>technicalError</servlet-name>
+		<url-pattern>/technicalError</url-pattern>
+	</servlet-mapping>	
+	<servlet>
+		<servlet-name>inscriptionTest</servlet-name>
+		<jsp-file>/inscription-test.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>inscriptionTest</servlet-name>
+		<url-pattern>/forward/inscription-test</url-pattern>
+		</servlet-mapping>
+		<servlet>
+		<servlet-name>header</servlet-name>
+		<jsp-file>/head.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>header</servlet-name>
+		<url-pattern>/head</url-pattern>
+	</servlet-mapping>
 </web-app>

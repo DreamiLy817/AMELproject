@@ -16,6 +16,7 @@ import fr.eni.amel.bll.manager.impl.AuthentificationManagerImpl;
 import fr.eni.amel.bo.Utilisateur;
 import fr.eni.tp.web.common.HttpStatus;
 import fr.eni.tp.web.common.bll.exception.ElementNotFoundException;
+import fr.eni.tp.web.common.bll.exception.ManagerException;
 import fr.eni.tp.web.common.exception.FunctionalException;
 import sun.rmi.server.Dispatcher;
 
@@ -58,22 +59,29 @@ public class AuthentificationController extends HttpServlet{
 		
 		String mail = request.getParameter("identifiant");
 		String password = request.getParameter("password");
-		
-		Utilisateur utilisateur = authentificationManager.getAuthentification(mail, password);
-		
-		if (utilisateur != null) {
-			request.getSession().setAttribute("utilisateur", utilisateur.getIdUtilisateur());
-			selectionnerTests(request, response);
-		} else {
-			// redirige vers l'authentification
-			request.getRequestDispatcher("/authentification").forward(request, response);
+		try {
+			Utilisateur utilisateur = authentificationManager.getAuthentification(mail, password);
 			
+			if (utilisateur != null) {
+				request.getSession().setAttribute("utilisateur", utilisateur.getIdUtilisateur());
+				
+				// redirige vers page de tests
+				//request.getRequestDispatcher("/tests/show").forward(request, response);
+				response.sendRedirect("/AMELproject/tests/show");
+			} else {
+				// redirige vers l'authentification
+				request.getRequestDispatcher("/authentification").forward(request, response);
+				
+			}
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 		
 	}
 	
-	protected void selectionnerTests(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/tests/show").forward(request, response);
-	}
+	
 
 }

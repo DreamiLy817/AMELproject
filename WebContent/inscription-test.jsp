@@ -24,38 +24,13 @@
 	<div class="container">
 		<h1>Inscriptions aux tests</h1>
 		<div class="parametre-block">
-			<div class="search-block">
-				<p>Rechercher les candidats</p>
-				<form action="${pageContext.request.contextPath}/login/validerAcces"
-					method="post">
-					<div class="input-group stylish-input-group">
-						<input type="text" class="form-control" placeholder="Search">
-						<span class="input-group-addon">
-							<button type="submit">ok</button>
-						</span>
-					</div>
-
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio"
-							name="inlineRadioOptions" id="inlineRadio1" value="option1">
-						<label class="form-check-label" for="inlineRadio1">Nom</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio"
-							name="inlineRadioOptions" id="inlineRadio2" value="option2">
-						<label class="form-check-label" for="inlineRadio2">Promotion</label>
-					</div>
-				</form>
-			</div>
-
 			<div class="selection-block">
 				<form>
 					<p>Sélectionner le test</p>
 					<select class="custom-select mr-sm-2">
-						<option selected>Choose...</option>
-						<option value="1">One</option>
-						<option value="2">Two</option>
-						<option value="3">Three</option>
+						<c:forEach items="${tests}" var="test">
+							<option value="${test.idTest}">${test.libelle}</option>
+						</c:forEach>
 					</select>
 				</form>
 				<form>
@@ -69,45 +44,56 @@
 					</div>
 				</form>
 			</div>
-
-
+		</div>
+		<div class="search-block">
+			<p>Rechercher les candidats</p>
+				<div class="input-group stylish-input-group">
+					<input type="text" class="form-control" placeholder="Search" id="search-input">
+					<span class="input-group-addon">
+						<button onclick="searchFunction()">ok</button>
+					</span>
+				</div>
 		</div>
 		<div class="candidat-block">
 			<div class="candidatTrouve-block">
 				<form>
 					<div class="form-group">
-						<label for="candidatTrouve">Candidats trouvés</label> <select
-							multiple class="form-control" id="candidatTrouve">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
+						<label for="candidatTrouve">Candidats</label> 
+						<select multiple class="form-control" id="candidatTrouve">
+							<c:forEach items="${candidats}" var="candidat">
+						<option value="${candidat.idUtilisateur}">${candidat.prenom} ${candidat.nom}</option>
+					</c:forEach>
 						</select>
 					</div>
 				</form>
 			</div>
-			<div>
-				<i class="fa fa-angle-right" aria-hidden="true"></i> <i
-					class="fa fa-angle-left" aria-hidden="true"></i>
-			</div>
-			<div class="candidatInscrit-block">
-				<form>
-					<div class="form-group">
-						<label for="candidatInscrit">Candidats inscrits</label> <select
-							multiple class="form-control" id="candidatInscrit">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-						</select>
-					</div>
-				</form>
-			</div>
-
-
 		</div>
 	</div>
+	<script type="text/javascript">
+	
+		function searchFunction() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				var info = xhttp.responseText;
+				var parent = document.getElementById("candidatTrouve");
+				 parent.innerHTML = "";
+				
+				$.each(JSON.parse(info), function(i, candidat) {
+					 parent.innerHTML += "<option>" + candidat.nom + " " + candidat.prenom + "</option>";
+					});
+
+
+				}
+			};
+			var libelleRecherche = "http://localhost:8080/AMELproject/rest/inscription-test/candidats?recherche=" + document.getElementById("search-input").value;
+			xhttp.open(
+							"GET",
+							libelleRecherche,
+							true);
+			xhttp.send();
+		}
+	</script>
+
 </body>
 </html>

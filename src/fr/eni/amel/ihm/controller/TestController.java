@@ -15,6 +15,7 @@ import fr.eni.amel.bll.factory.ManagerFactory;
 import fr.eni.amel.bll.manager.EpreuveManager;
 import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Question;
+import fr.eni.tp.web.common.bll.exception.ManagerException;
 
 public class TestController extends HttpServlet {
 
@@ -33,49 +34,64 @@ public class TestController extends HttpServlet {
 		// Rï¿½cupï¿½rer l'identifiant de l'utilisateur dans la session
 
 		int idUtilisateur = (int) request.getSession().getAttribute("utilisateur");
-		
+
 		// Lister les tests pour l'utilisateur
 
-		List<Epreuve> epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+		List<Epreuve> epreuves;
+		try {
+			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+			request.setAttribute("epreuves", epreuves);
+			if (epreuves.isEmpty()) {
+				request.setAttribute("infoMessage", "il n'y a pas d'Ã©preuves pour l'instant");
+			}
+			request.getRequestDispatcher("/forward/tests").forward(request, response);
+		} catch (ManagerException e) {
+			LOGGER.info("erreur survenue pendant affichage des Ã©preuves d'un utilisateur");
+			request.setAttribute("error", e);
+			response.sendRedirect("/AMELproject/technicalError");
+		}
 
-
-		request.setAttribute("epreuves", epreuves);
-
-		request.getRequestDispatcher("/forward/tests").forward(request, response);
-
-		// } catch (ManagerException e) {
-		// LOGGER.error("Technical Error", e);
-		// response.sendError(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
-		// }
 	}
+
 	/**
-	 * méthode qui sert à 
-	 * - soit à afficher les épreuves d'un utilisateur 
-	 * 		(grâce à l'attribut action avec pour valeur login)
-	 * - soit à confirmer  l'épreuve sélectionnée
+	 * mï¿½thode qui sert ï¿½ - soit ï¿½ afficher les ï¿½preuves d'un utilisateur (grï¿½ce
+	 * ï¿½ l'attribut action avec pour valeur login) - soit ï¿½ confirmer l'ï¿½preuve
+	 * sï¿½lectionnï¿½e
 	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// récupère l'attribut action du formulaire
+		// rï¿½cupï¿½re l'attribut action du formulaire
 		String action = request.getParameter("action");
-		// vérification attribut action si = "login"
-		if ("login".equals(action))  {
+		// vï¿½rification attribut action si = "login"
+		if ("login".equals(action)) {
 			doGet(request, response);
 			return;
-		} 
+		}
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
 		String idEpreuve = request.getParameter("idEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
 		request.setAttribute("dureeEpreuve", dureeEpreuve);
-		request.getSession().setAttribute("idEpreuve", idEpreuve);
+
 		request.getRequestDispatcher("/test/confirm").forward(request, response);
 	}
 
 	protected void lancerTest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
+//		String idEpreuve = request.getParameter("idEpreuve");
+//		Integer id = Integer.parseInt(idEpreuve);
+//		List<Question> listeQuestionsTireesAuSort = null;
+//		try {
+//			listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
+//		} catch (ManagerException e) {
+//			LOGGER.info("erreur survenue pendant le tirage au sort des questions d'une Ã©preuve");
+//			request.setAttribute("error", e);
+//			response.sendRedirect("/AMELproject/technicalError");
+//		}
+//		request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
+//		request.getRequestDispatcher("/question/show").forward(request, response);
 	}
 }

@@ -38,7 +38,7 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 	}
 	
 	@Override
-	public Utilisateur getAuthentification(String mail, String password) {
+	public Utilisateur getAuthentification(String mail, String password) throws ManagerException{
 		
 		
 		Utilisateur utilisateur = null;
@@ -52,9 +52,8 @@ public class AuthentificationManagerImpl implements AuthentificationManager {
 		
 			
 		} catch (DaoException e) {
-			LOGGER.error("Les identifiants que vous avez saisis sont incorrects.", e);
+			throw new ManagerException("Message Manager", e);
 			
-			e.printStackTrace();
 		}
 		
 		return utilisateur;
