@@ -10,9 +10,8 @@
 	<title>QCM ENI - Authentification</title>
 </head>
 <body>
-
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-md-2 offset-md-1">
 			<form action="${pageContext.request.contextPath}/login" method="POST">
 				<label for="identifiant" class="form-text-label">Identifiant :</label>
 				<input type="email" class="form-text-input" name="identifiant">
