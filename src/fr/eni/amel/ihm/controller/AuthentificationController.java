@@ -63,9 +63,6 @@ public class AuthentificationController extends HttpServlet{
 		
 		if (utilisateur != null) {
 			request.getSession().setAttribute("utilisateur", utilisateur.getIdUtilisateur());
-			
-			// redirige vers page de tests
-			//request.getRequestDispatcher("/tests/show").forward(request, response);
 			selectionnerTests(request, response);
 		} else {
 			// redirige vers l'authentification

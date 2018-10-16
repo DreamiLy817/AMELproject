@@ -52,6 +52,19 @@ public class EpreuveManagerImpl implements EpreuveManager {
 
 		return listeEpreuvesUtilisateur;
 	}
+	
+	public Epreuve getUneEpreuve(Integer idEpreuve) {
+		Epreuve epreuve = null;
+
+		try {
+			epreuve = epreuveDAO.selectById(idEpreuve);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return epreuve;
+	}
 
 	/**
 	 * Pour une épreuve sélectionnée, récupérer pour le test , les sections

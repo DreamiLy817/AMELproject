@@ -16,5 +16,7 @@ public interface EpreuveManager {
 	List<SectionTest> listerSectionsTestsPourEpreuve(Integer idEpreuve);
 	
 	List<Question> tirerAuSortQuestions(Integer idEpreuve);
+	
+	Epreuve getUneEpreuve(Integer idEpreuve);
 
 }

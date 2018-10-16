@@ -20,7 +20,7 @@ public class QuestionTirageDaoImpl implements QuestionTirageDAO{
 	
 private static final String insert 	= "INSERT INTO QUESTION_TIRAGE (estMarquee, idQuestion, numordre, idEpreuve) VALUES (?, ?, ?, ?)";
 private static final String insert_reponse 	= "INSERT INTO REPONSE_TIRAGE (idProposition, idQuestion, idEpreuve) VALUES (?, ?, ?)";
-private static final String delete_reponse 	= "DELETE FROM REPONSE_TIRAGE WHERE idProposition = ? and  idQuestion = ? and idEpreuve = ?)";
+private static final String delete_reponse 	= "DELETE FROM REPONSE_TIRAGE WHERE idProposition = ? and  idQuestion = ? and idEpreuve = ?";
 private static final String select_all 	= "SELECT * FROM QUESTION_TIRAGE ";
 private static final String select_id 	= "SELECT * FROM QUESTION_TIRAGE WHERE idEpreuve = ? and idQuestion = ? ";
 private static final String select_epreuve 	= "SELECT * FROM QUESTION_TIRAGE WHERE idEpreuve = ?";

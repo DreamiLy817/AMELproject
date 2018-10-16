@@ -67,18 +67,15 @@ public class TestController extends HttpServlet {
 		} 
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
+		String idEpreuve = request.getParameter("idEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
 		request.setAttribute("dureeEpreuve", dureeEpreuve);
-		
+		request.getSession().setAttribute("idEpreuve", idEpreuve);
 		request.getRequestDispatcher("/test/confirm").forward(request, response);
 	}
 
 	protected void lancerTest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String idEpreuve = request.getParameter("idEpreuve");
-		Integer id = Integer.parseInt(idEpreuve);
-		List<Question> listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
-		request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
-		request.getRequestDispatcher("/question/show").forward(request, response);
+		
 	}
 }
