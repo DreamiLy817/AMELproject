@@ -1,6 +1,7 @@
 package fr.eni.amel.test.manager;
 
 import fr.eni.amel.bll.factory.ManagerFactory;
+import fr.eni.tp.web.common.bll.exception.ManagerException;
 
 public class AppliEpreuveManager {
 
@@ -10,7 +11,12 @@ public class AppliEpreuveManager {
 		//ManagerFactory.epreuveManager().listerEpreuvesPourUtilisateur(2);
 		
 		// Test de la méthode qui liste 
-		ManagerFactory.epreuveManager().tirerAuSortQuestions(1);
+		try {
+			ManagerFactory.epreuveManager().tirerAuSortQuestions(1);
+		} catch (ManagerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
