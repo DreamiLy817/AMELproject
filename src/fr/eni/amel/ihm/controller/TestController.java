@@ -39,7 +39,7 @@ public class TestController extends HttpServlet {
 
 		List<Epreuve> epreuves;
 		try {
-			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur, true);
 			request.setAttribute("epreuves", epreuves);
 			if (epreuves.isEmpty()) {
 				request.setAttribute("infoMessage", "il n'y a pas d'épreuves pour l'instant");
@@ -71,25 +71,28 @@ public class TestController extends HttpServlet {
 		}
 		String libelleEpreuve = request.getParameter("libelleEpreuve");
 		String dureeEpreuve = request.getParameter("dureeEpreuve");
+		String idEpreuve = request.getParameter("idEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
 		request.setAttribute("dureeEpreuve", dureeEpreuve);
-
+		request.setAttribute("idEpreuve", idEpreuve);
+		request.getSession().setAttribute("idEpreuve", idEpreuve);
 		request.getRequestDispatcher("/test/confirm").forward(request, response);
 	}
 
 	protected void lancerTest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String idEpreuve = request.getParameter("idEpreuve");
-		Integer id = Integer.parseInt(idEpreuve);
-		List<Question> listeQuestionsTireesAuSort = null;
-		try {
-			listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
-		} catch (ManagerException e) {
-			LOGGER.info("erreur survenue pendant le tirage au sort des questions d'une épreuve");
-			request.setAttribute("error", e);
-			response.sendRedirect("/AMELproject/technicalError");
-		}
-		request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
-		request.getRequestDispatcher("/question/show").forward(request, response);
+
+//		String idEpreuve = request.getParameter("idEpreuve");
+//		Integer id = Integer.parseInt(idEpreuve);
+//		List<Question> listeQuestionsTireesAuSort = null;
+//		try {
+//			listeQuestionsTireesAuSort = epreuveManager.tirerAuSortQuestions(id);
+//		} catch (ManagerException e) {
+//			LOGGER.info("erreur survenue pendant le tirage au sort des questions d'une épreuve");
+//			request.setAttribute("error", e);
+//			response.sendRedirect("/AMELproject/technicalError");
+//		}
+//		request.setAttribute("listeQuestionsTireesAuSort", listeQuestionsTireesAuSort);
+//		request.getRequestDispatcher("/question/show").forward(request, response);
 	}
 }

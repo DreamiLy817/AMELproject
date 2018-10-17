@@ -27,7 +27,7 @@
 			<div class="selection-block">
 				<form>
 					<p>Sélectionner le test</p>
-					<select class="custom-select mr-sm-2">
+					<select class="custom-select mr-sm-2" name="test">
 						<c:forEach items="${tests}" var="test">
 							<option value="${test.idTest}">${test.libelle}</option>
 						</c:forEach>
@@ -59,12 +59,13 @@
 				<form>
 					<div class="form-group">
 						<label for="candidatTrouve">Candidats</label> 
-						<select multiple class="form-control" id="candidatTrouve">
+						<select multiple class="form-control" id="candidatTrouve" name="candidatTrouve">
 							<c:forEach items="${candidats}" var="candidat">
 						<option value="${candidat.idUtilisateur}">${candidat.prenom} ${candidat.nom}</option>
 					</c:forEach>
 						</select>
 					</div>
+					<input type="submit" value="Valider">
 				</form>
 			</div>
 		</div>

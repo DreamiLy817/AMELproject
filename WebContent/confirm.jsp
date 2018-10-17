@@ -17,12 +17,11 @@
 	<div class="col-sm-12">
 		<jsp:include page="/head" />
 		<div class="col-sm-6 offset-sm-3">
-			<form action="${pageContext.request.contextPath}/question/show"
-				method="post">
+			<form action="${pageContext.request.contextPath}/question/tirage" method="post">
 				<fieldset class="scheduler-border">
 					<legend class="scheduler-border">Confirmation</legend>
 					<div class="control-group">
-						<input type="hidden" name="idEpreuve" value="${epreuve.idEpreuve}" />
+						<input type="hidden" name="idEpreuve" value="${idEpreuve}" />
 						<p>Voulez-vous vraiment démarrer le test ${libelleEpreuve}?</p>
 						<p>Le test durera ${dureeEpreuve} minutes.</p>
 

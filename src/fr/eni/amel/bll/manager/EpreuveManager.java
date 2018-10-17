@@ -12,10 +12,12 @@ import fr.eni.tp.web.common.bll.exception.ManagerException;
 public interface EpreuveManager {
 	
 
-	List<Epreuve> listerEpreuvesPourUtilisateur(Integer idUtilisateur) throws ManagerException;
+	List<Epreuve> listerEpreuvesPourUtilisateur(Integer idUtilisateur, Boolean seulement_active) throws ManagerException;
 	
 	List<SectionTest> listerSectionsTestsPourEpreuve(Integer idEpreuve)throws ManagerException;
 	
+	Epreuve getUneEpreuve(Integer idEpreuve);
+
 	List<Question> tirerAuSortQuestions(Integer idEpreuve)throws ManagerException;
 
 }

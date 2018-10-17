@@ -45,6 +45,8 @@ public class InscriptionTestController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		Integer idUtilisateur = Integer.parseInt(request.getParameter("candidatTrouve"));
+		Integer idTest = Integer.parseInt(request.getParameter("test"));
+		
+		}
 }

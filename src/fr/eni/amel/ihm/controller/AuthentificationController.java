@@ -59,7 +59,6 @@ public class AuthentificationController extends HttpServlet{
 		
 		String mail = request.getParameter("identifiant");
 		String password = request.getParameter("password");
-		
 		try {
 			Utilisateur utilisateur = authentificationManager.getAuthentification(mail, password);
 			
