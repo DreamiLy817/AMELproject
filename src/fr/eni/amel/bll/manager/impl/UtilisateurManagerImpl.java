@@ -6,7 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.eni.amel.bll.manager.UtilisateurManager;
+import fr.eni.amel.bo.Profil;
+import fr.eni.amel.bo.Promotion;
 import fr.eni.amel.bo.Utilisateur;
+import fr.eni.amel.dal.ProfilDao;
+import fr.eni.amel.dal.PromotionDao;
 import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.tp.web.common.bll.exception.ElementNotFoundException;
@@ -94,26 +98,27 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 	@Override
 	public Utilisateur createUtilisateur(Utilisateur utilisateur) throws ManagerException, FunctionalException {
 		
-		
 		 try {
-
 	            ValidationUtil.checkNotNull(utilisateur);
-//	            ValidationUtil.checkNotNull(utilisateur.getIdUtilisateur());
-
+	            
 	            try {
 	                ValidationUtil.checkNotBlank(utilisateur.getNom());
 	                ValidationUtil.checkNotBlank(utilisateur.getPrenom());
 	                ValidationUtil.checkNotNull(utilisateur.getEmail());
 	                ValidationUtil.checkNotBlank(utilisateur.getEmail());
+	                
 	                ValidationUtil.checkNotBlank(utilisateur.getPassword());
 	                ValidationUtil.checkNotNull(utilisateur.getPassword());
+	                // hash le mot de passe
+	                String hashPassword = PasswordTools.hashSHA256(utilisateur.getPassword());
+	                utilisateur.setPassword(hashPassword);
 	                
-	                ValidationUtil.checkNotBlank(utilisateur.getProfil().getLibelle());
-	                ValidationUtil.checkNotNull(utilisateur.getProfil().getLibelle());
-	                //ValidationUtil.checkNotBlank(utilisateur.getPromo().getLibelle());
+	                ValidationUtil.checkNotNull(utilisateur.getProfil().getCodeProfil());
+	            
+	                
 	                
 	            } catch (Exception e) {
-	                throw new FunctionalException("The name cannot be blank", null);
+	                throw new FunctionalException("Functional exception", null);
 	            }
 	           
 
@@ -171,7 +176,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 		} catch (DaoException e) {
 			
 			LOGGER.error("Erreur DAO en supprimant cet-te utilisateurice", e);
-            throw new ManagerException(e.getMessage(), e);
+            throw new ManagerException("Message Manager", e);
             
         } catch (IllegalArgumentException e) {
         	
