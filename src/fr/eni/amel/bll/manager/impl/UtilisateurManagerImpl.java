@@ -23,8 +23,6 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 	
 	private UtilisateurDao utilisateurDao = DaoFactory.getUtilisateurDao();
 	
-	private PromotionDao promoDao = DaoFactory.getPromotionDao();
-	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UtilisateurManager.class);
 	
 	private static UtilisateurManagerImpl instance;
@@ -100,26 +98,27 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 	@Override
 	public Utilisateur createUtilisateur(Utilisateur utilisateur) throws ManagerException, FunctionalException {
 		
-		
 		 try {
-
 	            ValidationUtil.checkNotNull(utilisateur);
-//	            ValidationUtil.checkNotNull(utilisateur.getIdUtilisateur());
-
+	            
 	            try {
 	                ValidationUtil.checkNotBlank(utilisateur.getNom());
 	                ValidationUtil.checkNotBlank(utilisateur.getPrenom());
 	                ValidationUtil.checkNotNull(utilisateur.getEmail());
 	                ValidationUtil.checkNotBlank(utilisateur.getEmail());
+	                
 	                ValidationUtil.checkNotBlank(utilisateur.getPassword());
 	                ValidationUtil.checkNotNull(utilisateur.getPassword());
+	                // hash le mot de passe
+	                String hashPassword = PasswordTools.hashSHA256(utilisateur.getPassword());
+	                utilisateur.setPassword(hashPassword);
 	                
-	                ValidationUtil.checkNotBlank(utilisateur.getProfil().getLibelle());
-	                ValidationUtil.checkNotNull(utilisateur.getProfil().getLibelle());
+	                ValidationUtil.checkNotNull(utilisateur.getProfil().getCodeProfil());
 	            
 	                
+	                
 	            } catch (Exception e) {
-	                throw new FunctionalException("The name cannot be blank", null);
+	                throw new FunctionalException("Functional exception", null);
 	            }
 	           
 

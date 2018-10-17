@@ -43,8 +43,6 @@ public class PromotionManagerImpl implements PromotionManager {
 			e.printStackTrace();
 		}
 		
-		System.out.println(listePromos);
-	
 		return listePromos;
 			
 	}

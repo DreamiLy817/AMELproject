@@ -21,8 +21,8 @@
 	<div class="col-sm-12">
 		<div class="col-sm-6 offset-sm-3">
 			<div class="container">
-				<form action="${pageContext.request.contextPath}/candidat/create" method="POST">
-					<label for="prenom">Prénon :</label>
+				<form action="${pageContext.request.contextPath}/utilisateur/create" method="POST">
+					<label for="prenom">Prénom :</label>
 					<input type="text" name="prenom">
 					<label for="nom">Nom :</label>
 					<input type="text" name="nom">
@@ -32,13 +32,13 @@
 					<input type="password" name="password">
 					<label for="profils">Profil :</label>
 					<select name="profils">
-						<c:forEach items="profils" var="profil">
+						<c:forEach items="${profils}" var="profil">
 							<option value="${profil.codeProfil}">${profil.libelle}</option>
 						</c:forEach>
 					</select>
 					<label for="promos">Promotion :</label>
 					<select name="promos">
-						<c:forEach items="promotions" var="promotion">
+						<c:forEach items="${promotions}" var="promotion">
 							<option value="${promotion.codePromo }">${promotion.libelle}</option>
 						</c:forEach>
 					</select>

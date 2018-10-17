@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.amel.bll.manager.ProfilManager;
-import fr.eni.amel.bll.manager.PromotionManager;
-import fr.eni.amel.bll.manager.impl.ProfilManagerImpl;
-import fr.eni.amel.bll.manager.impl.PromotionManagerImpl;
+import fr.eni.amel.bll.factory.ManagerFactory;
+import fr.eni.amel.bll.manager.UtilisateurManager;
+import fr.eni.amel.bll.manager.impl.UtilisateurManagerImpl;
 import fr.eni.amel.bo.Profil;
 import fr.eni.amel.bo.Promotion;
+import fr.eni.amel.bo.Utilisateur;
 import fr.eni.tp.web.common.bll.exception.ManagerException;
+import fr.eni.tp.web.common.exception.FunctionalException;
 
 /**
  * Servlet implementation class CandidatController
@@ -37,25 +38,29 @@ public class CreateUtilisateurController extends HttpServlet implements Servlet 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProfilManager profilManager = ProfilManagerImpl.getInstance();
-		List<Profil> listeProfils = null;
+
 		
-		PromotionManager promoManager = PromotionManagerImpl.getInstance();
-		List<Promotion> listePromos = null;
-		try {
-			listeProfils = profilManager.getProfils();
+			List<Profil> listeProfils = null;
+			List<Promotion> listePromos = null;
 			
-			listePromos = promoManager.getPromotions();
+			try {
+				
+				listeProfils = ManagerFactory.profilManager().getProfils();
+				listePromos = ManagerFactory.promotionManager().getPromotions();
+				for (Promotion promo : listePromos) {
+					System.out.println(promo);
+				}
+				
+			} catch (ManagerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
-		} catch (ManagerException e) {
-			e.printStackTrace();
-		}
+		request.getSession().setAttribute("profils", listeProfils);
 		
-		request.setAttribute("profils", listeProfils);
-	
-		request.setAttribute("promos", listePromos);
+		request.getSession().setAttribute("promotions", listePromos);
 		
-		request.getRequestDispatcher("/user/creation").forward(request, response);
+		request.getRequestDispatcher("/forward/creation-utilisateur").forward(request, response);
 		
 	}
 
@@ -63,8 +68,33 @@ public class CreateUtilisateurController extends HttpServlet implements Servlet 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		UtilisateurManager utilisateurManager = UtilisateurManagerImpl.getInstance();
+		
+		String prenom = request.getParameter("prenom");
+		String nom = request.getParameter("nom");
+		String email = request.getParameter("mail");
+		String password = request.getParameter("password");
+		int codeProfil = Integer.parseInt(request.getParameter("profils"));
+		int codePromo = Integer.parseInt(request.getParameter("promos"));
+		
+		Profil profil = new Profil();
+		profil.setCodeProfil(codeProfil);
+		Promotion promo = new Promotion();
+		promo.setCodePromo(codePromo);
+		
+		Utilisateur utilisateur = new Utilisateur(nom, prenom, email, password, profil, promo);
+		
+		try {
+			
+			utilisateurManager.createUtilisateur(utilisateur);
+				
+			response.sendRedirect("/AMELproject/utilisateur/create");
+			
+		} catch (ManagerException | FunctionalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
