@@ -45,24 +45,22 @@ public Connection getConnection() throws SQLException
 }
 
 @Override
-	public Object insert(Object element) throws DaoException {
+	public void insert(int IdQuestion, int IdEpreuve, int ordre) throws DaoException {
 		
 		Connection cnx=null;
 		PreparedStatement rqt=null;
-		QuestionTirage tirage = (QuestionTirage)element;
 		
 		try{
 			cnx = getConnection();
 			rqt=cnx.prepareStatement(insert);
-			rqt.setBoolean(1, tirage.isEstmarquee());
-			rqt.setInt(2,tirage.getQuestion().getIdQuestion());
-			rqt.setInt(3, tirage.getNumordre());
-			rqt.setInt(4, tirage.getEpreuve().getIdEpreuve());
+			rqt.setBoolean(1, false);
+			rqt.setInt(2,IdQuestion);
+			rqt.setInt(3, ordre);
+			rqt.setInt(4, IdEpreuve);
 			rqt.executeUpdate();
 		}catch (SQLException e) {
 			throw new DaoException(e.getMessage(), e);
 		}
-		return tirage;
 	}
 
 	@Override
@@ -239,6 +237,12 @@ public Connection getConnection() throws SQLException
 			throw new DaoException(e.getMessage(), e);
 		}
 		return question_tirage;
+	}
+
+	@Override
+	public Object insert(Object element) throws DaoException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -13,6 +13,8 @@ public interface QuestionTirageDAO extends GenericDAO{
 	public void createReponse(Integer idEpreuve, Integer idQuestion,Integer idProposition) throws DaoException;
 	
 	public void deleteReponse(Integer idEpreuve, Integer idQuestion,Integer idProposition) throws DaoException;
+
+	public void insert(int IdQuestion, int IdEpreuve, int ordre) throws DaoException;
 	
 	
 

@@ -39,7 +39,7 @@ public class TestController extends HttpServlet {
 
 		List<Epreuve> epreuves;
 		try {
-			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur, true);
 			request.setAttribute("epreuves", epreuves);
 			if (epreuves.isEmpty()) {
 				request.setAttribute("infoMessage", "il n'y a pas d'épreuves pour l'instant");
@@ -74,7 +74,8 @@ public class TestController extends HttpServlet {
 		String idEpreuve = request.getParameter("idEpreuve");
 		request.setAttribute("libelleEpreuve", libelleEpreuve);
 		request.setAttribute("dureeEpreuve", dureeEpreuve);
-
+		request.setAttribute("idEpreuve", idEpreuve);
+		request.getSession().setAttribute("idEpreuve", idEpreuve);
 		request.getRequestDispatcher("/test/confirm").forward(request, response);
 	}
 

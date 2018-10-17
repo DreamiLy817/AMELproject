@@ -34,7 +34,7 @@ public class ResultatController extends HttpServlet {
 		int idUtilisateur = (int) request.getSession().getAttribute("utilisateur");
 		List<Epreuve> epreuves;
 		try {
-			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur);
+			epreuves = epreuveManager.listerEpreuvesPourUtilisateur(idUtilisateur, false);
 			request.setAttribute("epreuves", epreuves);
 			if (epreuves.isEmpty()) {
 				request.setAttribute("infoMessage", "il n'y a pas d'épreuves pour l'instant");

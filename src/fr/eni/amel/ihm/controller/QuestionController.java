@@ -50,11 +50,13 @@ public class QuestionController extends HttpServlet {
 		
 		if(!verifier_acces(request))
 		{
+			System.out.println("test 0 ");
 			response.sendRedirect("/AMELproject/tests/show");
 			return;
 		}
 		else
 		{
+			System.out.println("test 1 ");
 			int idEpreuve = Integer.parseInt((String)request.getSession().getAttribute("idEpreuve"));
 			int numero = 0;
 			if (request.getParameter("no") != null) {
@@ -71,6 +73,7 @@ public class QuestionController extends HttpServlet {
 			
 			if(questions.size() > 0 )
 			{
+				System.out.println("test 2 ");
 				PropositionManager propositionManager =  PropositionManagerImpl.getInstance();
 				List<Proposition> listPropositionsCoche = propositionManager.getReponseCochee(idEpreuve, questions.get(numero).getIdQuestion());
 				

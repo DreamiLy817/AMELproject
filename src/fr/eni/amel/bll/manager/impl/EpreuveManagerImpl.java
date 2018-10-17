@@ -1,6 +1,8 @@
 package fr.eni.amel.bll.manager.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -8,6 +10,7 @@ import fr.eni.amel.bll.manager.EpreuveManager;
 import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Question;
 import fr.eni.amel.bo.SectionTest;
+import fr.eni.amel.bo.Test;
 import fr.eni.amel.dal.EpreuveDAO;
 import fr.eni.amel.dal.SectionTestDao;
 import fr.eni.amel.dal.factory.DaoFactory;
@@ -38,15 +41,31 @@ public class EpreuveManagerImpl implements EpreuveManager {
 	 * inscrit
 	 */
 	@Override
-	public List<Epreuve> listerEpreuvesPourUtilisateur(Integer idUtilisateur) throws ManagerException {
-		List<Epreuve> listeEpreuvesUtilisateur = null;
-
+	public List<Epreuve> listerEpreuvesPourUtilisateur(Integer idUtilisateur, Boolean seulement_active) throws ManagerException {
+		
+		List<Epreuve> listeEpreuvesUtilisateur = null;		
 		try {
 			ValidationUtil.checkNotNull(idUtilisateur);
 			listeEpreuvesUtilisateur = epreuveDAO.selectByUtilisateur(idUtilisateur);
 
 		} catch (DaoException e) {
 			throw new ManagerException("Message Manager", e);
+		}
+		
+		
+		if(seulement_active)
+		{
+			
+			Iterator<Epreuve> iter = listeEpreuvesUtilisateur.iterator();
+
+			while (iter.hasNext()) {
+				Epreuve epreuve = iter.next();
+				
+				if(!DateManagerImpl.isBeforeDay(new Date(), epreuve.getDateFinValidite()) || !DateManagerImpl.isAfterDay(epreuve.getDateFinValidite(), new Date()))
+				{
+					iter.remove();
+				}
+			}
 		}
 
 		return listeEpreuvesUtilisateur;

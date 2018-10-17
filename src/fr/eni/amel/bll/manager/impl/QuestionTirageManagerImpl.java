@@ -35,17 +35,14 @@ public class QuestionTirageManagerImpl implements QuestionTirageManager {
 	
 	public void insert(int idQuestion, int idEpreuve){
 		
-		QuestionTirage questionTirage = new QuestionTirage();
-		questionTirage.set
+		int ordre = 0;
 		
 		try {
-			DaoFactory.questiontirageDAO().insert(element)
+			DaoFactory.questiontirageDAO().insert(idQuestion, idEpreuve, ordre);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return null;
 		
 	}
 	
