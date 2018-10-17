@@ -15,6 +15,16 @@ public class Utilisateur {
 		
 	}
 	
+	/**
+	 * Constructeur avec toutes les propriétés en paramètre
+	 * @param idUtilisateur
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param password
+	 * @param profil
+	 * @param promotion
+	 */
 	public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String password, Profil profil, Promotion promotion) {
 		super();
 		setIdUtilisateur(idUtilisateur);
@@ -29,6 +39,28 @@ public class Utilisateur {
 	
 
 	/**
+	 * Constructeur de création
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param password
+	 * @param profil
+	 * @param promotion
+	 */
+	public Utilisateur( String nom, String prenom, String email, String password, Profil profil, Promotion promotion) {
+		super();
+		setIdUtilisateur(idUtilisateur);
+		setNom(nom);
+		setPrenom(prenom);
+		setEmail(email);
+		setPassword(password);
+		setProfil(profil);
+		setPromo(promotion);
+	}
+	
+
+	/**
+	 * Constructeur pour rechercher un candidat
 	 * @param idUtilisateur
 	 * @param nom
 	 * @param prenom
@@ -43,6 +75,7 @@ public class Utilisateur {
 		setEmail(email);
 		setPassword(password);
 	}
+
 
 	/**
 	 * @return the idUtilisateur
@@ -62,7 +95,7 @@ public class Utilisateur {
 	 * @return the nom
 	 */
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
 	/**

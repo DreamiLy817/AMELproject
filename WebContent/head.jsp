@@ -10,13 +10,16 @@
         <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Mes Tests</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/tests/show">Mes Tests</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">Mes Résultats</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/forward/results">Mes Résultats</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/utilisateur/create">Créer un utilisateur</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Deconnexion</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/deconnexion">Deconnexion</a>
       </li>
     </ul>
   </div>
