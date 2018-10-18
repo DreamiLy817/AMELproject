@@ -27,10 +27,6 @@ legend.scheduler-border {
     text-align: left !important;
 }
 
-#candidatTrouve {
-	height: 500px;
-}
-
 .authentification, .user-creation {
 	margin: 0 auto;
 	padding: 50px;

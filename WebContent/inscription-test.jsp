@@ -22,6 +22,7 @@
 <title>Inscriptions aux tests</title>
 </head>
 <body id="inscription-test">
+<jsp:include page="/head" />
 	<div class="container">
 		<h1>Inscriptions aux tests</h1>
 		<div class="parametre-block">
