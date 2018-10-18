@@ -17,6 +17,7 @@ import fr.eni.amel.bo.Utilisateur;
 import fr.eni.tp.web.common.bll.exception.ManagerException;
 import fr.eni.tp.web.common.exception.FunctionalException;
 
+import fr.eni.amel.bll.manager.impl.ManipDate;
 /**
  * Servlet implementation class InscriptionTestController
  */
@@ -59,16 +60,34 @@ public class InscriptionTestController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Integer idUtilisateur = Integer.parseInt(request.getParameter("candidatTrouve"));
-		Integer idTest = Integer.parseInt(request.getParameter("test"));
-		Date dateDebutValidite = request.getParameter("dateDebutValidite");
-		Epreuve epreuve = null;
+		System.out.println(request.getParameter("candidatTrouve"));
+		int idUtilisateur = Integer.parseInt(request.getParameter("candidatTrouve"));
 		
-		try {
-			 ManagerFactory.epreuveManager().insert(epreuve);
-		} catch (ManagerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		Utilisateur user = null;
+		//user.setIdUtilisateur(idUtilisateur);
+		
+		
+		Integer idTest = Integer.parseInt(request.getParameter("test"));
+		Test test = null; 
+		//test.setIdTest(idTest);
+	
+		String dateDebutValidite = request.getParameter("dateDebutValidite");
+		String dateFinValidite = request.getParameter("dateFinValidite");
+		
+		
+		Date dateDebutValiditeUtil = ManipDate.stringVersUtil(dateDebutValidite);
+		Date dateFinValiditeUtil = ManipDate.stringVersUtil(dateFinValidite);
+		
+		
+		
+		//Epreuve epreuve = new Epreuve(dateDebutValiditeUtil, dateFinValiditeUtil, 0, "CR",test , user);
+		
+//		try {
+//			 ManagerFactory.epreuveManager().insert(epreuve);
+//		} catch (ManagerException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }

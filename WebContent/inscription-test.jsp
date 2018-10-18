@@ -57,12 +57,15 @@
 				<form>
 					<div class="form-group">
 						<label for="candidatTrouve">Candidats</label> 
-						<select multiple class="form-control" id="candidatTrouve" name="candidatTrouve">
+						<select class="form-control" id="candidatTrouve" name="candidatTrouve">
 							<c:forEach items="${candidats}" var="candidat">
-						<option value="${candidat.idUtilisateur}">${candidat.prenom} ${fn:toUpperCase(candidat.nom)}</option>
-					</c:forEach>
+								<option value="${candidat.idUtilisateur}">${candidat.prenom} ${fn:toUpperCase(candidat.nom)}</option>
+							</c:forEach>
 						</select>
 					</div>
+				</form>
+				
+				<form action="${pageContext.request.contextPath}/inscription-test" method="POST">
 					<input type="submit" value="Valider">
 				</form>
 			</div>
