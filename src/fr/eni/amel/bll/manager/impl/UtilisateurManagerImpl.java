@@ -129,8 +129,8 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 	            throw new ManagerException(e.getMessage(), e);
 
 	        } catch (IllegalArgumentException e) {
-	        	LOGGER.error("L'utilisateur n'est pas valide car null", e);
-	            throw new ManagerException("L'utilisateurice ne peut être null", e);
+	        	LOGGER.error("L'utilisateurice n'est pas valide car null", e);
+	            throw new ManagerException("Message Manager", e);
 	        }
 	        
 	        return utilisateur;
@@ -191,7 +191,7 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 	 * @param recherche un candidat
 	 * @return
 	 */
-	public List<Utilisateur> getRechercheCandidat(String recherche) {
+	public List<Utilisateur> getRechercheCandidat(String recherche) throws ManagerException, FunctionalException{
 		List<Utilisateur>  listeCandidat = null;
 		try {
 			listeCandidat =  utilisateurDao.rechercherCandidat(recherche);
@@ -199,25 +199,20 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
-		StringBuffer sb = new StringBuffer();
-		for (Utilisateur candidat : listeCandidat) {
-			sb.append(" Nom [nom = ");
-			sb.append(candidat.getNom());
-			sb.append(" ,Prenom = ");
-			sb.append(candidat.getPrenom());
-			sb.append(" ,email = ");
-			sb.append(candidat.getEmail());
-			sb.append(" ,password = ");
-			sb.append(candidat.getPassword());
-			sb.append(" ,code Profil = ");
-			sb.append(candidat.getProfil());
-			sb.append(" ,code Promo = ");
-			sb.append(candidat.getPromo()).append("]\n");
-		}
-		System.out.println(sb);
-	
 		return listeCandidat;
 			
+	}
+
+	@Override
+	public List<Utilisateur> listCandidats() throws ManagerException, FunctionalException {
+		List<Utilisateur>  listeCandidat = null;
+		try {
+			listeCandidat =  utilisateurDao.listeCandidats();
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		return listeCandidat;
 	}
 }

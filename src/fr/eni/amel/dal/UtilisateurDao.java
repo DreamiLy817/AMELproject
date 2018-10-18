@@ -19,4 +19,8 @@ public interface UtilisateurDao extends GenericDAO<Utilisateur, Integer> {
 
 	public List<Utilisateur> rechercherCandidat(String recherche) throws DaoException;
 	
+	public List<Utilisateur> listeCandidats() throws DaoException;
+	
+	
+	
 }

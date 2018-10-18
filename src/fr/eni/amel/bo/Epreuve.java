@@ -46,6 +46,18 @@ public class Epreuve {
 		this.listeQuestionTirage = new ArrayList<QuestionTirage>();
 	}
 	
+	public Epreuve(Date dateDebutValidite, Date dateFinValidite, int tempsEcoule, String etat,
+			Test test, Utilisateur utilisateur) {
+		this.dateDebutValidite = dateDebutValidite;
+		this.dateFinValidite = dateFinValidite;
+		this.tempsEcoule = tempsEcoule;
+		this.etat = etat;
+		this.test = test;
+		this.utilisateur = utilisateur;
+		this.listeQuestionTirage = new ArrayList<QuestionTirage>();
+	}
+	
+	
 	//Getter
 
 	public Integer getIdEpreuve() {

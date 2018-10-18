@@ -160,7 +160,7 @@ public Connection getConnection() throws SQLException
 				//EpreuveDaoImpl epreuveDAO = EpreuveDaoImpl.getInstance();
 				//Epreuve epreuve = (Epreuve)epreuveDAO.selectById(rs.getInt("idEpreuve"));
 				//question_tirage.setEpreuve(epreuve);
-								
+				
 				//Ajouter question
 				QuestionDaoImpl questionDAO = QuestionDaoImpl.getInstance();
 				Question question = (Question)questionDAO.selectById(rs.getInt("idQuestion"));

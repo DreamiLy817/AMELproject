@@ -36,30 +36,6 @@ public class TestManagerImpl implements TestManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		StringBuffer sb = new StringBuffer();
-		for (Test test : listeTest) {
-			sb.append(" idTest  = ");
-			sb.append(test.getIdTest());
-			sb.append(" ,libelle = ");
-			sb.append(test.getLibelle());
-			sb.append(" ,description = ");
-			sb.append(test.getDescription());
-			sb.append(" ,duree = ");
-			sb.append(test.getDuree());
-			sb.append(" ,liste Section Test = ");
-			sb.append(test.getListeSectionTests());
-			sb.append(" ,liste epreuve = ");
-			sb.append(test.getListeEpreuves());
-			sb.append(" ,seuil haut = ");
-			sb.append(test.getSeuil_haut());
-			sb.append(" ,seuil_bas = ");
-			sb.append(test.getSeuil_bas()).append("]\n");
-			
-		}
-		
-		System.out.println(sb);
-		
 		return listeTest;
 		
 		

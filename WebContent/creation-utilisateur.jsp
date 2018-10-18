@@ -18,32 +18,58 @@
 </head>
 <body>
 	<jsp:include page="/head" />
-	<div class="col-sm-12">
-		<div class="col-sm-6 offset-sm-3">
-			<div class="container">
+	<div class="creation-block">
+		<div>
+			<div class="user-creation">
 				<form action="${pageContext.request.contextPath}/utilisateur/create" method="POST">
-					<label for="prenom">Prénom :</label>
-					<input type="text" name="prenom">
-					<label for="nom">Nom :</label>
-					<input type="text" name="nom">
-					<label for="mail">Email :</label>
-					<input type="email" name="mail">
-					<label for="password">Mot de passe :</label>
-					<input type="password" name="password">
-					<label for="profils">Profil :</label>
-					<select name="profils">
-						<c:forEach items="${profils}" var="profil">
-							<option value="${profil.codeProfil}">${profil.libelle}</option>
-						</c:forEach>
-					</select>
-					<label for="promos">Promotion :</label>
-					<select name="promos">
-						<c:forEach items="${promotions}" var="promotion">
-							<option value="${promotion.codePromo }">${promotion.libelle}</option>
-						</c:forEach>
-					</select>
-					<button type="submit" value="valider">Valider</button>
+					<div class="form-group">
+						<label for="prenom" class="form-text-label">Prénom :</label>
+						<input type="text" class="form-text-input form-control" name="prenom">
+					</div>
+					<div class="form-group">
+						<label for="nom" class="form-text-label">Nom :</label>
+						<input type="text" class="form-text-input form-control" name="nom">
+					</div>
+					<div class="form-group">
+						<label for="mail" class="form-text-label">Email :</label>
+						<input type="email" class="form-text-input form-control" name="mail">
+					</div>
+					<div class="form-group">
+						<label for="password" class="form-text-label">Mot de passe :</label>
+						<input type="password" class="form-text-input form-control" name="password">
+					</div>
+					<div class="form-group">
+						<label for="profils" class="form-text-label">Profil :</label>
+						<select name="profils" class="form-control">
+							<c:forEach items="${profils}" var="profil">
+								<option value="${profil.codeProfil}">${profil.libelle}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<%--  <c:if test="${profil.codeProfil == 3 }"> --%>
+						<div class="form-group">
+							<label for="promos" class="form-text-label">Promotion :</label>
+							<select name="promos" class="form-control">
+								<c:forEach items="${promotions}" var="promotion">
+									<option value="${promotion.codePromo }">${promotion.libelle}</option>
+								</c:forEach>
+							</select>
+						</div>
+					<%-- </c:if> --%>
+					
+					<div class="d-flex justify-content-center">
+						<button type="submit" class="btn btn-outline-dark" name="action" value="create">Valider</button>
+					</div>
 				</form>
+			</div>
+			<div class="message">
+				<jsp:include page="/error"/>
+				<c:if test="${infoMessage != null}">
+					<c:remove var="errorMessage" scope="session" /> 
+					<div class="alert alert-success mt-5">
+						${infoMessage}
+					</div>
+				</c:if>
 			</div>
  		</div>
 	</div>

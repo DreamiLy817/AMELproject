@@ -25,8 +25,8 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 	private static final String UPDATE_UTIL_QUERY = "UPDATE UTILISATEUR SET nom=?, prenom=?, email=?, password=?, codeProfil=?, codePromo=? WHERE idUtilisateur = ?";
 	private static final String DELETE_UTIL_QUERY = "DELETE FROM UTILISATEUR WHERE idUtilisateur = ?";
 	private static final String SELECT_UTIL_BY_EMAIL_PASSWORD = "SELECT u.idUtilisateur, u.nom, u.prenom, u.email, u.password, u.codeProfil, u.codePromo FROM UTILISATEUR u WHERE u.email = ? and u.password = ?";
-	private static final String RECHERCHE_UTIL_QUERY = "SELECT  * FROM UTILISATEUR WHERE nom LIKE ? or prenom LIKE ? and codeProfil = 3  ORDER BY idUtilisateur ASC";
-	
+	private static final String RECHERCHE_UTIL_QUERY = "SELECT  * FROM UTILISATEUR WHERE  codeProfil = 3 AND (nom LIKE ? OR prenom LIKE ?) ORDER BY idUtilisateur ASC";
+	private static final String SELECT_ALL_CANDIDATS = "SELECT  * FROM UTILISATEUR WHERE  codeProfil = 3";
 	
 	private Connection connection;
 	private static UtilisateurDaoImpl instance;
@@ -365,6 +365,58 @@ public class UtilisateurDaoImpl implements UtilisateurDao{
 			}
 		}
 		return listeUser;
+	}
+
+	@Override
+	public List<Utilisateur> listeCandidats() throws DaoException {
+		Connection cnx = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();
+		Utilisateur utilisateur = null;
+		
+		try {
+//			cnx = MSSQLConnectionFactory.get();
+			cnx = getConnection();
+			stmt = cnx.prepareStatement(SELECT_ALL_CANDIDATS);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				utilisateur = new Utilisateur();
+				utilisateur.setIdUtilisateur(rs.getInt("idUtilisateur"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setPassword(rs.getString("password"));
+				
+				ProfilDaoImpl profilDAO =  ProfilDaoImpl.getInstance();
+				Profil unProfil = (Profil)profilDAO.selectById(rs.getInt("codeProfil"));
+				utilisateur.setProfil(unProfil);
+				
+				PromotionDaoImpl promoDAO = PromotionDaoImpl.getInstance();
+				Promotion unePromo = (Promotion)promoDAO.selectById(rs.getInt("codePromo"));
+				utilisateur.setPromo(unePromo);
+				
+				listeUtilisateurs.add(utilisateur);
+				
+			}
+			
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		} finally {
+			ResourceUtil.safeClose(rs, stmt);
+			try {
+				if (cnx != null) {	
+					cnx.close();
+					this.connection = null;
+				} 
+			} catch (SQLException e) {
+				throw new DaoException(e.getMessage(), e);
+				
+			}
+		}
+		
+		return listeUtilisateurs;
 	}
 	
 }
