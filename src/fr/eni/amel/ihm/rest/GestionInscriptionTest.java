@@ -11,6 +11,8 @@ import fr.eni.amel.bll.factory.ManagerFactory;
 import fr.eni.amel.bo.Utilisateur;
 import fr.eni.amel.dal.UtilisateurDao;
 import fr.eni.amel.dal.factory.DaoFactory;
+import fr.eni.tp.web.common.bll.exception.ManagerException;
+import fr.eni.tp.web.common.exception.FunctionalException;
 
 @Path("/inscription-test")
 public class GestionInscriptionTest {
@@ -22,7 +24,7 @@ public class GestionInscriptionTest {
 	
 	@GET
 	@Path("/candidats")
-	public List<Utilisateur> getCandidats(@QueryParam(value = "recherche") String recherche) {
+	public List<Utilisateur> getCandidats(@QueryParam(value = "recherche") String recherche) throws ManagerException, FunctionalException {
 	
 		List<Utilisateur> candidats = ManagerFactory.utilisateurManager().getRechercheCandidat(recherche);
 		return candidats;
