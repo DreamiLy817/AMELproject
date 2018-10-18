@@ -67,7 +67,13 @@ public class QuestionManagerImpl implements QuestionManager{
 			QuestionDao questionDao = DaoFactory.questionDAO();
 			
 			for(QuestionTirage laQuestion: listTirage) {
-				questions.add(laQuestion.getQuestion());		
+				Question question = laQuestion.getQuestion();
+				if(laQuestion.isEstmarquee())
+				{
+					System.out.println("marque");
+					question.setEstMarquee(true);
+				}
+				questions.add(question);		
 			}
 			
 			return questions;

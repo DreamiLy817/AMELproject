@@ -4,7 +4,6 @@ import java.util.List;
 
 import fr.eni.amel.bll.manager.QuestionTirageManager;
 import fr.eni.amel.bo.Proposition;
-import fr.eni.amel.bo.Question;
 import fr.eni.amel.bo.QuestionTirage;
 import fr.eni.amel.dal.factory.DaoFactory;
 import fr.eni.tp.web.common.dal.exception.DaoException;
@@ -47,6 +46,17 @@ public class QuestionTirageManagerImpl implements QuestionTirageManager {
 			e.printStackTrace();
 		}
 		
+	}
+
+
+	@Override
+	public void update(int IdQuestion, int IdEpreuve, Boolean marquee) {
+		try {
+			DaoFactory.questiontirageDAO().update(IdQuestion, IdEpreuve, marquee);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
