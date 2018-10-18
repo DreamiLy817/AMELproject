@@ -22,4 +22,7 @@ public interface EpreuveManager {
 	
 	Epreuve insert(Epreuve epreuve) throws ManagerException;
 
+	public void updateTimer(int timer, int idEpreuve);
+	
+	public void addTimer(int idEpreuve);
 }

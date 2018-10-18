@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.amel.bll.factory.ManagerFactory;
 import fr.eni.amel.bll.manager.EpreuveManager;
 import fr.eni.amel.bll.manager.PropositionManager;
 import fr.eni.amel.bll.manager.QuestionManager;
+import fr.eni.amel.bll.manager.QuestionTirageManager;
 import fr.eni.amel.bll.manager.impl.DateManagerImpl;
 import fr.eni.amel.bll.manager.impl.EpreuveManagerImpl;
 import fr.eni.amel.bll.manager.impl.PropositionManagerImpl;
@@ -22,6 +24,7 @@ import fr.eni.amel.bll.manager.impl.QuestionManagerImpl;
 import fr.eni.amel.bo.Epreuve;
 import fr.eni.amel.bo.Proposition;
 import fr.eni.amel.bo.Question;
+import fr.eni.amel.bo.QuestionTirage;
 import fr.eni.amel.bo.Test;
 
 /**
@@ -50,20 +53,23 @@ public class QuestionController extends HttpServlet {
 		
 		if(!verifier_acces(request))
 		{
-			System.out.println("test 0 ");
 			response.sendRedirect("/AMELproject/tests/show");
 			return;
 		}
 		else
 		{
-			System.out.println("test 1 ");
 			int idEpreuve = Integer.parseInt((String)request.getSession().getAttribute("idEpreuve"));
+			
+			EpreuveManager epreuveManager =  ManagerFactory.epreuveManager();
+			Epreuve epreuve = epreuveManager.getUneEpreuve(idEpreuve);
+			
+			
 			int numero = 0;
 			if (request.getParameter("no") != null) {
 				numero = Integer.parseInt(request.getParameter("no"));
 			}
 			
-			QuestionManager questionManager =  QuestionManagerImpl.getInstance();
+			QuestionManager questionManager =  ManagerFactory.questionManager();
 			List<Question> questions = questionManager.getQuestionEpreuve(idEpreuve);
 			
 			if(numero > questions.size()-1 || numero < 0)
@@ -73,8 +79,7 @@ public class QuestionController extends HttpServlet {
 			
 			if(questions.size() > 0 )
 			{
-				System.out.println("test 2 ");
-				PropositionManager propositionManager =  PropositionManagerImpl.getInstance();
+				PropositionManager propositionManager =  ManagerFactory.propositionManager();
 				List<Proposition> listPropositionsCoche = propositionManager.getReponseCochee(idEpreuve, questions.get(numero).getIdQuestion());
 				
 				List<Proposition> newlist = new ArrayList<Proposition>(); 
@@ -94,12 +99,10 @@ public class QuestionController extends HttpServlet {
 				}
 				
 				questions.get(numero).setListePropositions(newlist);
-				
 				request.setAttribute("numero", numero);
 		        request.setAttribute("question", questions.get(numero));
-		        request.setAttribute("idEpreuve", idEpreuve);
-		        request.setAttribute("nbQuestion", questions.size() -1);
-		
+		        request.setAttribute("epreuve", epreuve);
+		        request.setAttribute("allQuestions", questions);
 		        request.getRequestDispatcher("/forward/question").forward(request, response);
 			}
 			else

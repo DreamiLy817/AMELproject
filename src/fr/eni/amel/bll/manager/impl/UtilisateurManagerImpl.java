@@ -129,8 +129,8 @@ public class UtilisateurManagerImpl implements UtilisateurManager{
 	            throw new ManagerException(e.getMessage(), e);
 
 	        } catch (IllegalArgumentException e) {
-	        	LOGGER.error("L'utilisateur n'est pas valide car null", e);
-	            throw new ManagerException("L'utilisateurice ne peut être null", e);
+	        	LOGGER.error("L'utilisateurice n'est pas valide car null", e);
+	            throw new ManagerException("Message Manager", e);
 	        }
 	        
 	        return utilisateur;

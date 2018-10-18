@@ -24,6 +24,7 @@ private static final String delete_reponse 	= "DELETE FROM REPONSE_TIRAGE WHERE 
 private static final String select_all 	= "SELECT * FROM QUESTION_TIRAGE ";
 private static final String select_id 	= "SELECT * FROM QUESTION_TIRAGE WHERE idEpreuve = ? and idQuestion = ? ";
 private static final String select_epreuve 	= "SELECT * FROM QUESTION_TIRAGE WHERE idEpreuve = ?";
+private static final String update = "update QUESTION_TIRAGE set estMarquee = ? where idQuestion = ? and idEpreuve = ?";
 
 private Connection connection;
 private static QuestionTirageDaoImpl instance;
@@ -63,10 +64,22 @@ public Connection getConnection() throws SQLException
 		}
 	}
 
-	@Override
-	public void update(Object element) throws DaoException {
-		// TODO Auto-generated method stub
+
+	public void update(int IdQuestion, int IdEpreuve, Boolean marquee) throws DaoException {
 		
+		Connection cnx=null;
+		PreparedStatement rqt=null;
+
+		try{
+			cnx = getConnection();
+			rqt=cnx.prepareStatement(update);
+			rqt.setBoolean(1, marquee);
+			rqt.setInt(2,IdQuestion);
+			rqt.setInt(3, IdEpreuve);
+			rqt.executeUpdate();
+		}catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		}
 	}
 
 	@Override
@@ -147,7 +160,7 @@ public Connection getConnection() throws SQLException
 				//EpreuveDaoImpl epreuveDAO = EpreuveDaoImpl.getInstance();
 				//Epreuve epreuve = (Epreuve)epreuveDAO.selectById(rs.getInt("idEpreuve"));
 				//question_tirage.setEpreuve(epreuve);
-								
+				
 				//Ajouter question
 				QuestionDaoImpl questionDAO = QuestionDaoImpl.getInstance();
 				Question question = (Question)questionDAO.selectById(rs.getInt("idQuestion"));
@@ -243,6 +256,12 @@ public Connection getConnection() throws SQLException
 	public Object insert(Object element) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void update(Object element) throws DaoException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

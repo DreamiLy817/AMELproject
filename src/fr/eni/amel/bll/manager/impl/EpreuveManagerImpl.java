@@ -103,6 +103,34 @@ public class EpreuveManagerImpl implements EpreuveManager {
 		}
 		return listeSectionTest;
 	}
+	
+	
+	public void updateTimer(int timer, int idEpreuve) {
+		
+		try {
+			Epreuve epreuve = epreuveDAO.selectById(idEpreuve);
+			epreuve.setTempsEcoule(epreuve.getTest().getDuree() - (int)Math.floor(timer / 60));
+			epreuveDAO.update(epreuve);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void addTimer(int idEpreuve) {
+		
+		try {
+			Epreuve epreuve = epreuveDAO.selectById(idEpreuve);
+			epreuve.setTempsEcoule(epreuve.getTempsEcoule() + 1);
+			epreuveDAO.update(epreuve);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 	/**
 	 * Pour une sectionTest, r�cup�rer les questions

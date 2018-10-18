@@ -46,12 +46,10 @@
     <servlet-name>reponseController</servlet-name>
     <url-pattern>/reponse/save</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>reponseController</servlet-name>
     <servlet-class>fr.eni.amel.ihm.controller.ReponseController</servlet-class>
   </servlet>
-  
    <servlet> 
 		<servlet-name>InscriptionTestController</servlet-name>
 		<servlet-class>fr.eni.amel.ihm.controller.InscriptionTestController</servlet-class>
@@ -73,8 +71,7 @@
 		<servlet-class>fr.eni.amel.ihm.controller.TestController</servlet-class>
 	</servlet>
 
-
-<!-- CONTROLLER TEST -->
+ <!-- CONTROLLER TEST -->
 	<servlet-mapping>
 		<servlet-name>ResultatController</servlet-name>
 		<url-pattern>/results/show</url-pattern>
@@ -85,6 +82,26 @@
 		<servlet-class>fr.eni.amel.ihm.controller.ResultatController</servlet-class>
 	</servlet>
 	
+	<!-- CONTROLLER FIN EPREUVE -->
+	<servlet-mapping>
+		<servlet-name>FinEpreuveController</servlet-name>
+		<url-pattern>/epreuve/fin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FinEpreuveController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.FinEpreuveController</servlet-class>
+	</servlet>
+	<!-- JSP FIN EPREUVE -->
+	<servlet>
+		<servlet-name>finEpreuve</servlet-name>
+		<jsp-file>/finEpreuve.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>finEpreuve</servlet-name>
+		<url-pattern>/forward/finEpreuve</url-pattern>
+	</servlet-mapping>
 	
 	<!-- JSP RESULT -->
 	<servlet>
@@ -117,47 +134,18 @@
 		<servlet-name>confirmTest</servlet-name>
 		<url-pattern>/test/confirm</url-pattern>
 	</servlet-mapping>
-
-	<!-- JSP TECHNICAL ERROR -->
-	<servlet>
-		<servlet-name>technicalError</servlet-name>
-		<jsp-file>/technicalError.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>technicalError</servlet-name>
-		<url-pattern>/technicalError</url-pattern>
-	</servlet-mapping>
-
-
-	
-	<servlet>
+  
+  	<servlet>
 		<servlet-name>inscriptionTest</servlet-name>
 		<jsp-file>/inscription-test.jsp</jsp-file>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>inscriptionTest</servlet-name>
 		<url-pattern>/forward/inscription-test</url-pattern>
-		</servlet-mapping>
-		<servlet>
-		<servlet-name>header</servlet-name>
-		<jsp-file>/head.jsp</jsp-file>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>header</servlet-name>
-		<url-pattern>/head</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>TirageController</servlet-name>
-		<url-pattern>/question/tirage</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>TirageController</servlet-name>
-		<servlet-class>fr.eni.amel.ihm.controller.TirageController</servlet-class>
-	</servlet>
-	
-	<filter>
+	</servlet-mapping> 
+   
+   
+  <filter>
     <filter-name>Filtre</filter-name>
     <filter-class>fr.eni.amel.ihm.controller.Filtre</filter-class>
   </filter>
@@ -165,9 +153,30 @@
     <filter-name>Filtre</filter-name>
     <url-pattern>/question/*</url-pattern>
     <url-pattern>/test/*</url-pattern>
+    <url-pattern>/results/*</url-pattern>
+    <url-pattern>/utilisateur/*</url-pattern>
+    <url-pattern>/deconnexion</url-pattern>
   </filter-mapping>
   
-  <servlet>
+  	<servlet>
+		<servlet-name>header</servlet-name>
+		<jsp-file>/head.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>header</servlet-name>
+		<url-pattern>/head</url-pattern>
+	</servlet-mapping>
+  
+  	<servlet-mapping>
+		<servlet-name>TirageController</servlet-name>
+		<url-pattern>/question/tirage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>TirageController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.TirageController</servlet-class>
+	</servlet>
+   
+   <servlet>
     <servlet-name>creationUtilisateur</servlet-name>
     <jsp-file>/creation-utilisateur.jsp</jsp-file>
   </servlet>
@@ -183,12 +192,44 @@
     <servlet-name>createUtilisateurController</servlet-name>
     <url-pattern>/utilisateur/create</url-pattern>
   </servlet-mapping>
+   
+   
+   
+   <servlet>
+    <servlet-name>deconnexionController</servlet-name>
+    <servlet-class>fr.eni.amel.ihm.controller.DeconnexionController</servlet-class>
+   </servlet>
+   
+  <servlet-mapping>
+    <servlet-name>deconnexionController</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>deconnexionController</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  
+  	<!-- JSP TECHNICAL ERROR -->
+	<servlet>
+		<servlet-name>technicalError</servlet-name>
+		<jsp-file>/technicalError.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>technicalError</servlet-name>
+		<url-pattern>/technicalError</url-pattern>
+  </servlet-mapping>
   <servlet>
-  	<servlet-name>deconnexionController</servlet-name>
-  	<servlet-class>fr.eni.amel.ihm.controller.DeconnexionController</servlet-class>
+    <servlet-name>errorDisplayer</servlet-name>
+    <jsp-file>/error-displayer.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>deconnexionController</servlet-name>
-  	<url-pattern>/deconnexion</url-pattern>
+    <servlet-name>errorDisplayer</servlet-name>
+    <url-pattern>/error</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  
+  
 </web-app>

@@ -10,19 +10,31 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="./css/style.css">
 	
 	<title>QCM ENI - Authentification</title>
 </head>
 <body>
-	<div class="col-sm-12">
-		<div class="col-sm-6 offset-sm-3">
-			<form action="${pageContext.request.contextPath}/login" method="POST">
-				<label for="identifiant" class="form-text-label">Identifiant :</label>
-				<input type="email" class="form-text-input" name="identifiant">
-				<label for="password" class="form-text-label">Mot de passe :</label>
-				<input type="password" class="form-text-input" name="password">
-				<button type="submit" class="form-submit-input" name="action" value="login">Valider</button>
-			</form>
+	<div class="login-block">
+		<div>
+			<div class="authentification">
+				<form action="${pageContext.request.contextPath}/login" method="POST">
+					<div class="form-group">
+					<label for="identifiant" class="form-text-label">Identifiant :</label>
+					<input type="email" class="form-text-input form-control" name="identifiant">
+					</div>
+					<div class="form-group">
+					<label for="password" class="form-text-label">Mot de passe :</label>
+					<input type="password" class="form-text-input form-control" name="password">
+					</div>
+					<div class="d-flex justify-content-center">
+						<button type="submit" class="form-submit-input btn btn-outline-dark" name="action" value="login">Valider</button>
+					</div>
+				</form>
+			</div>
+			<div class="error-message">
+				<jsp:include page="/error"/>
+			</div>
 		</div>
 	</div>
 
