@@ -6,9 +6,6 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/tests/show">Mes Tests</a>
       </li>
@@ -19,8 +16,12 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/utilisateur/create">Créer un utilisateur</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/inscription-test">Inscrire un utilisateur à un test</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/deconnexion">Deconnexion</a>
       </li>
+      
     </ul>
   </div>
 </nav>
