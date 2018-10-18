@@ -10,9 +10,18 @@ public class QuestionTirage {
 	private Integer numordre;
 	private Epreuve epreuve;
 	private List<Proposition> listproposition;
+	private boolean estRepondue;
 	
 	//Constructeur
 	
+	public boolean isEstRepondue() {
+		return estRepondue;
+	}
+
+	public void setEstRepondue(boolean estRepondue) {
+		this.estRepondue = estRepondue;
+	}
+
 	public QuestionTirage() {
 		this.listproposition = new ArrayList<Proposition>();
 	}
