@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,10 +49,7 @@
 		<div class="search-block">
 			<p>Rechercher les candidats</p>
 				<div class="input-group stylish-input-group">
-					<input type="text" class="form-control" placeholder="Search" id="search-input">
-					<span class="input-group-addon">
-						<button onclick="searchFunction()">ok</button>
-					</span>
+					<input type="text" class="form-control" placeholder="Search" id="search-input" oninput="searchFunction()">
 				</div>
 		</div>
 		<div class="candidat-block">
@@ -61,7 +59,7 @@
 						<label for="candidatTrouve">Candidats</label> 
 						<select multiple class="form-control" id="candidatTrouve" name="candidatTrouve">
 							<c:forEach items="${candidats}" var="candidat">
-						<option value="${candidat.idUtilisateur}">${candidat.prenom} ${candidat.nom}</option>
+						<option value="${candidat.idUtilisateur}">${candidat.prenom} ${fn:toUpperCase(candidat.nom)}</option>
 					</c:forEach>
 						</select>
 					</div>
@@ -81,7 +79,9 @@
 				 parent.innerHTML = "";
 				
 				$.each(JSON.parse(info), function(i, candidat) {
-					 parent.innerHTML += "<option>" + candidat.nom + " " + candidat.prenom + "</option>";
+					var nom = candidat.nom;
+					var nomMaj = nom.toUpperCase();
+					 parent.innerHTML += "<option>" + candidat.prenom + " "  + nomMaj + "</option>";
 					});
 
 
