@@ -31,3 +31,27 @@ legend.scheduler-border {
 #candidatTrouve {
 	height: 500px;
 }
+
+.authentification, .user-creation {
+	margin: 0 auto;
+	padding: 50px;
+	width: 600px;
+}
+
+.authentification {
+	background-color: rgba(82, 216, 221, 0.5);
+	border-radius: 5px;
+}
+
+.authentification > form  label, .user-creation > form label {
+	display: block;
+}
+
+.login-block, .creation-block {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
