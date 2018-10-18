@@ -1,5 +1,9 @@
 package fr.eni.amel.bll.manager.impl;
 
+import java.util.List;
+
+import fr.eni.amel.bll.factory.ManagerFactory;
+import fr.eni.amel.bll.manager.QuestionManager;
 import fr.eni.amel.bll.manager.QuestionTirageManager;
 import fr.eni.amel.bo.Question;
 import fr.eni.amel.bo.QuestionTirage;
@@ -44,6 +48,17 @@ public class QuestionTirageManagerImpl implements QuestionTirageManager {
 			e.printStackTrace();
 		}
 		
+	}
+
+
+	@Override
+	public void update(int IdQuestion, int IdEpreuve, Boolean marquee) {
+		try {
+			DaoFactory.questiontirageDAO().update(IdQuestion, IdEpreuve, marquee);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

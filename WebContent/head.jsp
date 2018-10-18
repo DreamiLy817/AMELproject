@@ -13,7 +13,7 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/tests/show">Mes Tests</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="${pageContext.request.contextPath}/forward/results">Mes Résultats</a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/results/show">Mes Résultats</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="${pageContext.request.contextPath}/utilisateur/create">Créer un utilisateur</a>

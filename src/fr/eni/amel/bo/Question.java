@@ -17,6 +17,7 @@ public class Question implements Serializable {
 	private Long points;
 	private Theme theme;
 	private List<Proposition> listePropositions = new ArrayList<Proposition>();
+	private Boolean estMarquee;
 
 	public Question() {
 
@@ -29,6 +30,7 @@ public class Question implements Serializable {
 		this.media = media;
 		this.points = points;
 		this.theme = theme;
+		this.estMarquee = false;
 	}
 
 	public Question(Integer idQuestion, String enonce, String media, Long points, Theme theme, List<Proposition> listePropositions) {
@@ -39,6 +41,7 @@ public class Question implements Serializable {
 		this.points = points;
 		this.theme = theme;
 		this.listePropositions = listePropositions;
+		this.estMarquee = false;
 	}
 
 	public Integer getIdQuestion() {
@@ -79,6 +82,13 @@ public class Question implements Serializable {
 
 	public void setTheme(Theme theme) {
 		this.theme = theme;
+	}
+	
+	public Boolean getEstMarquee() {
+		return this.estMarquee;
+	}
+	public void setEstMarquee(Boolean marquage) {
+		this.estMarquee = marquage;
 	}
 
 	public List<Proposition> getListePropositions() {

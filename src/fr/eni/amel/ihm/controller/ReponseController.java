@@ -10,12 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.amel.bll.factory.ManagerFactory;
 import fr.eni.amel.bll.manager.PropositionManager;
-import fr.eni.amel.bll.manager.QuestionManager;
 import fr.eni.amel.bll.manager.QuestionTirageManager;
 import fr.eni.amel.bll.manager.impl.PropositionManagerImpl;
-import fr.eni.amel.bll.manager.impl.QuestionManagerImpl;
-import fr.eni.amel.bll.manager.impl.QuestionTirageManagerImpl;
 import fr.eni.amel.bo.Proposition;
 import fr.eni.amel.bo.Question;
 import fr.eni.amel.bo.QuestionTirage;
@@ -25,7 +23,10 @@ import fr.eni.amel.bo.QuestionTirage;
  */
 @WebServlet("/ReponseController")
 public class ReponseController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	private QuestionTirageManager questionTirageManager =  ManagerFactory.questionTirageManager();
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -52,10 +53,11 @@ public class ReponseController extends HttpServlet {
 		int idEpreuve = Integer.parseInt(request.getParameter("hid_idEpreuve"));
 		int idQuestion = Integer.parseInt(request.getParameter("hid_idQuestion"));
 		int numero = Integer.parseInt(request.getParameter("hid_no")) + 1;
-		QuestionTirageManager questionTirageManager =  QuestionTirageManagerImpl.getInstance();
+		
 		QuestionTirage questionTirage = questionTirageManager.getQuestionTirage(idQuestion ,idEpreuve);
 		Question question = questionTirage.getQuestion();
 
+		
 		List<Proposition> propositions = question.getListePropositions();
 		List<Proposition> propositionsCochee = new ArrayList<Proposition>();
 

@@ -20,4 +20,7 @@ public interface EpreuveManager {
 
 	List<Question> tirerAuSortQuestions(Integer idEpreuve)throws ManagerException;
 
+	public void updateTimer(int timer, int idEpreuve);
+	
+	public void addTimer(int idEpreuve);
 }

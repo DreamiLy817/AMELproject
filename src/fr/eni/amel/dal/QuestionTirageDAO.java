@@ -16,6 +16,6 @@ public interface QuestionTirageDAO extends GenericDAO{
 
 	public void insert(int IdQuestion, int IdEpreuve, int ordre) throws DaoException;
 	
-	
+	public void update(int IdQuestion, int IdEpreuve, Boolean marquee) throws DaoException;
 
 }
