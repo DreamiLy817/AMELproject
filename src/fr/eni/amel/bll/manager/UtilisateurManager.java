@@ -19,5 +19,11 @@ public interface UtilisateurManager {
 	
 	void deleteUtilisateur(Integer id) throws ManagerException, FunctionalException;
 	
-	public List<Utilisateur> getRechercheCandidat(String recherche);
+	List<Utilisateur> getRechercheCandidat(String recherche) throws ManagerException, FunctionalException;
+	
+	List<Utilisateur> listCandidats() throws ManagerException, FunctionalException;
+	
+	
+	
+	
 }

@@ -156,4 +156,14 @@ public class EpreuveManagerImpl implements EpreuveManager {
 		return listeQuestionsEpreuve;
 	}
 
+	@Override
+	public Epreuve insert(Epreuve epreuve) throws ManagerException {
+		try {
+			epreuve = epreuveDAO.insert(epreuve);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return epreuve;
+	}
 }
