@@ -85,6 +85,26 @@
 		<servlet-class>fr.eni.amel.ihm.controller.ResultatController</servlet-class>
 	</servlet>
 	
+	<!-- CONTROLLER FIN EPREUVE -->
+	<servlet-mapping>
+		<servlet-name>FinEpreuveController</servlet-name>
+		<url-pattern>/epreuve/fin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FinEpreuveController</servlet-name>
+		<servlet-class>fr.eni.amel.ihm.controller.FinEpreuveController</servlet-class>
+	</servlet>
+	<!-- JSP FIN EPREUVE -->
+	<servlet>
+		<servlet-name>finEpreuve</servlet-name>
+		<jsp-file>/finEpreuve.jsp</jsp-file>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>finEpreuve</servlet-name>
+		<url-pattern>/forward/finEpreuve</url-pattern>
+	</servlet-mapping>
 	
 	<!-- JSP RESULT -->
 	<servlet>

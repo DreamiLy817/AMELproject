@@ -19,7 +19,7 @@ public class PropositionDaoImpl implements PropositionDao {
 	private static final String SELECT_ALL_PROPOSITIONS_BY_QUESTION = "SELECT idProposition, enonce, estBonne FROM PROPOSITION WHERE idQuestion=?";
 	private static final String SELECT_PROPOSITION_QUERY ="SELECT idProposition, enonce, estBonne FROM PROPOSITION WHERE idProposition=?";
 	private static final String SELECT_ALL_PROPOSITIONS_REPONSE_BY_QUESTION_EPREUVE = "SELECT p.idProposition, p.enonce, p.estBonne FROM PROPOSITION p JOIN REPONSE_TIRAGE r ON r.idProposition = p.idProposition WHERE r.idQuestion = ? and r.idEpreuve = ?";
-	
+	private static final String SELECT_ALL_PROPOSITIONS_EST_BONNE_BY_QUESTION="SELECT idProposition, enonce, estBonne FROM PROPOSITION WHERE idQuestion=? and estBonne= 'true'";
 	private static PropositionDaoImpl instance;
 	
 	private Connection connection;
@@ -153,4 +153,30 @@ public class PropositionDaoImpl implements PropositionDao {
  		return listePropositions;
  	}
 
+	public List<Proposition> selectPropositionsBonnesParQuestion(Integer idQuestion) throws DaoException{
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		List<Proposition> listePropositions = new ArrayList();
+		Proposition proposition = null;
+ 		try {
+			//connection = MSSQLConnectionFactory.get();
+			connection = getConnection();
+			statement = connection.prepareStatement(SELECT_ALL_PROPOSITIONS_EST_BONNE_BY_QUESTION);
+			statement.setInt(1, idQuestion);
+ 			resultSet = statement.executeQuery();
+ 			while (resultSet.next()) {
+				proposition = new Proposition();
+				proposition.setIdProposition(resultSet.getInt("idProposition"));
+				
+				listePropositions.add(proposition);
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(), e);
+		} finally {
+			ResourceUtil.safeClose(resultSet, statement,connection);
+			this.connection = null;
+		}
+ 		return listePropositions;
+	}
 }
