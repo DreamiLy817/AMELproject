@@ -19,5 +19,7 @@ public interface EpreuveManager {
 	Epreuve getUneEpreuve(Integer idEpreuve);
 
 	List<Question> tirerAuSortQuestions(Integer idEpreuve)throws ManagerException;
+	
+	Epreuve insert(Epreuve epreuve) throws ManagerException;
 
 }
